@@ -240,14 +240,108 @@ function SectionTitle({ eyebrow, title, subtitle }: { eyebrow: string; title: st
 }
 
 /* ---------------- Portfolio (3D-ish glass cards) ---------------- */
-const portfolioItems = [
-  { tag: "RAG / Enterprise", title: "Retrieval Engine for Fortune 500", year: "2025" },
-  { tag: "Multi-Agent System", title: "Autonomous Operations Platform", year: "2025" },
-  { tag: "Automation", title: "Document Intelligence Pipeline", year: "2024" },
-  { tag: "AI Product", title: "Conversational Commerce Agent", year: "2024" },
+type Project = {
+  tag: string;
+  title: string;
+  year: string;
+  client: string;
+  duration: string;
+  summary: string;
+  problem: string;
+  approach: string[];
+  results: { label: string; value: string }[];
+  stack: string[];
+};
+
+const portfolioItems: Project[] = [
+  {
+    tag: "RAG / Enterprise",
+    title: "Retrieval Engine for Fortune 500",
+    year: "2025",
+    client: "Global Financial Services Firm",
+    duration: "14 weeks",
+    summary: "A secure, citation-grade retrieval system unifying 40+ years of internal research across 12M documents.",
+    problem: "Analysts were spending 6+ hours/week hunting through siloed PDFs, intranets, and SharePoint. Compliance demanded verifiable citations on every generated answer.",
+    approach: [
+      "Hybrid retrieval (BM25 + dense embeddings) with re-ranking and per-tenant ACLs.",
+      "Citation-locked generation: every claim grounded to a source span with confidence.",
+      "Evaluation harness with 1.2k expert-graded queries; weekly regression CI.",
+      "On-prem deployment with private model gateway and full audit trail.",
+    ],
+    results: [
+      { label: "Time-to-answer", value: "−87%" },
+      { label: "Citation accuracy", value: "98.4%" },
+      { label: "Analyst hours saved / wk", value: "4,200" },
+      { label: "ROI in year 1", value: "11×" },
+    ],
+    stack: ["LangGraph", "pgvector", "Cohere Rerank", "vLLM", "Kubernetes", "OpenTelemetry"],
+  },
+  {
+    tag: "Multi-Agent System",
+    title: "Autonomous Operations Platform",
+    year: "2025",
+    client: "Series C SaaS, 800 employees",
+    duration: "9 weeks",
+    summary: "A supervisor-worker agent mesh that resolves 62% of L1/L2 ops tickets without human escalation.",
+    problem: "Operations was scaling linearly with revenue. Tickets queued for hours; root cause analysis lived in tribal knowledge.",
+    approach: [
+      "Supervisor agent with planning loop; specialized worker agents for runbooks, billing, and infra.",
+      "Tool-use sandbox with policy gating, dry-run, and human-in-the-loop fallback.",
+      "Long-term memory in vector + graph store; postmortems auto-summarized.",
+    ],
+    results: [
+      { label: "Tickets auto-resolved", value: "62%" },
+      { label: "MTTR", value: "−71%" },
+      { label: "Headcount avoided", value: "8 FTE" },
+      { label: "CSAT change", value: "+14 pts" },
+    ],
+    stack: ["LangGraph", "Temporal", "Postgres", "Neo4j", "Datadog", "OpenAI / Anthropic"],
+  },
+  {
+    tag: "Automation",
+    title: "Document Intelligence Pipeline",
+    year: "2024",
+    client: "International Logistics Carrier",
+    duration: "6 weeks",
+    summary: "End-to-end parsing of bills of lading, customs forms, and invoices across 17 languages.",
+    problem: "Manual data entry on 40k documents/month produced a 7% error rate and a 3-day backlog at peak.",
+    approach: [
+      "Layout-aware extraction with vision-language models + structured schema validation.",
+      "Confidence routing: high-confidence auto-posts; ambiguous fields go to a review UI.",
+      "Continuous learning loop from correction telemetry.",
+    ],
+    results: [
+      { label: "Documents/month", value: "40k → 110k" },
+      { label: "Field accuracy", value: "99.2%" },
+      { label: "Backlog", value: "3d → 4h" },
+      { label: "Cost / document", value: "−68%" },
+    ],
+    stack: ["Donut", "GPT-4o Vision", "Pydantic", "Redis", "FastAPI", "n8n"],
+  },
+  {
+    tag: "AI Product",
+    title: "Conversational Commerce Agent",
+    year: "2024",
+    client: "DTC fashion brand, $90M GMV",
+    duration: "11 weeks",
+    summary: "A storefront AI concierge that handles discovery, sizing, and post-purchase across SMS and web.",
+    problem: "Conversion stalled at 1.8% and support tickets ballooned with sizing and returns questions.",
+    approach: [
+      "Catalog-grounded retrieval with stylist persona and structured product tools.",
+      "Realtime inventory + size-fit model trained on 2.4M historical orders.",
+      "A/B framework with sequential testing and guardrails on tone, pricing, and claims.",
+    ],
+    results: [
+      { label: "Conversion", value: "1.8% → 3.4%" },
+      { label: "Support tickets", value: "−41%" },
+      { label: "AOV", value: "+22%" },
+      { label: "Return rate", value: "−18%" },
+    ],
+    stack: ["Next.js", "Pinecone", "Anthropic Claude", "Stripe", "Segment", "Shopify"],
+  },
 ];
 
-function PortfolioCard({ item, i }: { item: typeof portfolioItems[number]; i: number }) {
+function PortfolioCard({ item, i, onOpen }: { item: Project; i: number; onOpen: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -255,8 +349,9 @@ function PortfolioCard({ item, i }: { item: typeof portfolioItems[number]; i: nu
   const ry = useSpring(useTransform(x, [-50, 50], [-8, 8]), { stiffness: 200, damping: 20 });
   return (
     <Reveal delay={i * 0.08}>
-      <motion.div
+      <motion.button
         ref={ref}
+        onClick={onOpen}
         onMouseMove={(e) => {
           const r = ref.current!.getBoundingClientRect();
           x.set(e.clientX - r.left - r.width / 2);
@@ -264,24 +359,124 @@ function PortfolioCard({ item, i }: { item: typeof portfolioItems[number]; i: nu
         }}
         onMouseLeave={() => { x.set(0); y.set(0); }}
         style={{ rotateX: rx, rotateY: ry, transformPerspective: 1000 }}
-        whileHover={{ scale: 1.04, y: -8 }}
+        whileHover={{ scale: 1.03, y: -8 }}
         transition={{ type: "spring", stiffness: 200, damping: 20 }}
-        className="group relative overflow-hidden rounded-3xl border border-black/15 bg-black/[0.02] backdrop-blur-sm p-8 md:p-10 min-h-[420px] flex flex-col justify-between"
+        className="group relative w-full text-left overflow-hidden rounded-3xl border border-black/15 bg-black/[0.02] backdrop-blur-sm p-8 md:p-10 min-h-[420px] flex flex-col justify-between cursor-pointer"
       >
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,50%),rgba(0,0,0,0.08),transparent_60%)]" />
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,50%),rgba(0,0,0,0.06),transparent_60%)]" />
         <div className="flex justify-between text-[10px] uppercase tracking-[0.25em] text-black/50">
           <span>{item.tag}</span>
           <span>{item.year}</span>
         </div>
         <div>
-          <h3 className="font-display text-3xl md:text-4xl leading-tight mb-6">{item.title}</h3>
+          <h3 className="font-display text-3xl md:text-4xl leading-tight mb-4">{item.title}</h3>
+          <p className="text-sm text-black/60 leading-relaxed mb-6 line-clamp-2">{item.summary}</p>
           <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-black/70 group-hover:text-black transition">
-            View Case <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+            View Case Study <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
           </div>
         </div>
         <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full border border-black/10 transition-transform duration-700 group-hover:scale-150" />
-      </motion.div>
+      </motion.button>
     </Reveal>
+  );
+}
+
+/* ---------------- Project detail modal ---------------- */
+function ProjectModal({ project, onClose }: { project: Project | null; onClose: () => void }) {
+  useEffect(() => {
+    if (!project) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => { document.body.style.overflow = ""; window.removeEventListener("keydown", onKey); };
+  }, [project, onClose]);
+
+  return (
+    <AnimatePresence>
+      {project && (
+        <motion.div
+          className="fixed inset-0 z-[120] flex items-start justify-center overflow-y-auto p-4 md:p-8"
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+        >
+          <motion.div
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            onClick={onClose}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          />
+          <motion.div
+            initial={{ opacity: 0, y: 24, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 12, scale: 0.98 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="relative z-10 w-full max-w-5xl rounded-3xl border border-black/15 bg-white shadow-2xl overflow-hidden my-8"
+          >
+            <button
+              onClick={onClose}
+              aria-label="Close"
+              className="absolute right-5 top-5 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/20 bg-white hover:bg-black hover:text-white transition"
+            >
+              <X className="h-4 w-4" />
+            </button>
+
+            <div className="relative px-8 md:px-14 pt-14 pb-10 border-b border-black/10 bg-[#fafafa]">
+              <div className="absolute inset-0 grid-bg opacity-60" />
+              <div className="relative">
+                <div className="flex flex-wrap gap-3 text-[10px] uppercase tracking-[0.25em] text-black/50">
+                  <span>{project.tag}</span><span>·</span><span>{project.year}</span><span>·</span><span>{project.duration}</span>
+                </div>
+                <h2 className="font-display text-3xl md:text-5xl leading-[1.05] mt-5 max-w-3xl">{project.title}</h2>
+                <p className="mt-5 max-w-2xl text-black/60 leading-relaxed">{project.summary}</p>
+                <div className="mt-6 text-xs uppercase tracking-[0.2em] text-black/50">Client · <span className="text-black/80">{project.client}</span></div>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-4 border-b border-black/10">
+              {project.results.map((r) => (
+                <div key={r.label} className="p-6 md:p-8 border-r last:border-r-0 border-black/10">
+                  <div className="font-display text-3xl md:text-4xl">{r.value}</div>
+                  <div className="mt-2 text-[10px] uppercase tracking-[0.25em] text-black/50">{r.label}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-10 px-8 md:px-14 py-12">
+              <div>
+                <div className="text-[10px] uppercase tracking-[0.3em] text-black/50 mb-4">The Problem</div>
+                <p className="text-black/75 leading-relaxed">{project.problem}</p>
+              </div>
+              <div>
+                <div className="text-[10px] uppercase tracking-[0.3em] text-black/50 mb-4">The Approach</div>
+                <ul className="space-y-3">
+                  {project.approach.map((a) => (
+                    <li key={a} className="flex gap-3 text-sm text-black/75 leading-relaxed">
+                      <Check className="h-4 w-4 mt-1 shrink-0" /> <span>{a}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="px-8 md:px-14 pb-12">
+              <div className="text-[10px] uppercase tracking-[0.3em] text-black/50 mb-4">Stack</div>
+              <div className="flex flex-wrap gap-2">
+                {project.stack.map((s) => (
+                  <span key={s} className="rounded-full border border-black/20 px-3 py-1 text-xs">{s}</span>
+                ))}
+              </div>
+            </div>
+
+            <div className="px-8 md:px-14 pb-12 flex flex-wrap gap-4 border-t border-black/10 pt-8">
+              <a href="#contact" onClick={onClose} className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-xs uppercase tracking-[0.2em] text-white hover:scale-105 transition">
+                Discuss A Similar Engagement <ArrowRight className="h-4 w-4" />
+              </a>
+              <button onClick={onClose} className="inline-flex items-center gap-2 rounded-full border border-black/30 px-6 py-3 text-xs uppercase tracking-[0.2em] hover:bg-black hover:text-white transition">
+                Close
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
