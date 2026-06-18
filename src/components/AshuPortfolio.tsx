@@ -46,7 +46,7 @@ function ScrollProgress() {
 
 /* ---------------- Magnetic button ---------------- */
 function Magnetic({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLButtonElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const sx = useSpring(x, { stiffness: 200, damping: 15 });
@@ -70,7 +70,7 @@ function Magnetic({ children, className = "" }: { children: React.ReactNode; cla
 
 /* ---------------- Interactive grid background ---------------- */
 function InteractiveGridBackground() {
-  const ref = useRef<HTMLButtonElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState({ x: 50, y: 50 });
   return (
     <div
