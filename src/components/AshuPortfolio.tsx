@@ -26,7 +26,7 @@ function CursorSpotlight() {
       className="pointer-events-none fixed top-0 left-0 z-[100] hidden md:block"
       style={{ x: sx, y: sy, translateX: "-50%", translateY: "-50%" }}
     >
-      <div className="h-6 w-6 rounded-full border border-white/60 mix-blend-difference" />
+      <div className="h-6 w-6 rounded-full border border-black/60 mix-blend-difference" />
     </motion.div>
   );
 }
@@ -38,7 +38,7 @@ function ScrollProgress() {
   return (
     <motion.div
       style={{ scaleX, transformOrigin: "0% 50%" }}
-      className="fixed top-0 left-0 right-0 z-[90] h-[2px] bg-white"
+      className="fixed top-0 left-0 right-0 z-[90] h-[2px] bg-black"
     />
   );
 }
@@ -82,9 +82,9 @@ function InteractiveGridBackground() {
     >
       <div
         className="absolute inset-0 transition-[background] duration-300"
-        style={{ background: `radial-gradient(600px circle at ${pos.x}% ${pos.y}%, rgba(255,255,255,0.08), transparent 40%)` }}
+        style={{ background: `radial-gradient(600px circle at ${pos.x}% ${pos.y}%, rgba(0,0,0,0.08), transparent 40%)` }}
       />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#000_70%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#fff_70%)]" />
     </div>
   );
 }
@@ -129,22 +129,22 @@ function Navbar() {
       initial={{ y: -30, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/40 border-b border-white/10"
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/40 border-b border-black/10"
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <a href="#home" className="font-display text-xl tracking-tight">ASHU<span className="opacity-50">.</span>AI</a>
         <div className="hidden lg:flex items-center gap-9 text-xs uppercase tracking-[0.18em]">
           {links.map((l) => (
-            <a key={l} href={`#${l.toLowerCase().replace(" ", "-")}`} className="relative group text-white/70 hover:text-white transition">
+            <a key={l} href={`#${l.toLowerCase().replace(" ", "-")}`} className="relative group text-black/70 hover:text-black transition">
               {l}
-              <span className="absolute left-0 -bottom-1 h-px w-0 bg-white transition-all duration-300 group-hover:w-full" />
+              <span className="absolute left-0 -bottom-1 h-px w-0 bg-black transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
         </div>
         <Magnetic>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 rounded-full border border-white/30 px-5 py-2.5 text-xs uppercase tracking-[0.18em] transition-all duration-300 hover:bg-white hover:text-black hover:scale-105"
+            className="inline-flex items-center gap-2 rounded-full border border-black/30 px-5 py-2.5 text-xs uppercase tracking-[0.18em] transition-all duration-300 hover:bg-black hover:text-white hover:scale-105"
           >
             Work With Me <ArrowUpRight className="h-3.5 w-3.5" />
           </a>
@@ -163,19 +163,19 @@ function Hero() {
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <InteractiveGridBackground />
       {/* floating shapes */}
-      <motion.div style={{ y: y1 }} className="absolute left-[8%] top-[20%] h-32 w-32 rounded-full border border-white/15" />
+      <motion.div style={{ y: y1 }} className="absolute left-[8%] top-[20%] h-32 w-32 rounded-full border border-black/15" />
       <motion.div
         style={{ y: y2 }}
         animate={{ rotate: 360 }}
         transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-        className="absolute right-[10%] top-[28%] h-40 w-40 border border-white/15"
+        className="absolute right-[10%] top-[28%] h-40 w-40 border border-black/15"
       />
-      <motion.div style={{ y: y1 }} className="absolute right-[18%] bottom-[18%] h-24 w-24 rounded-full bg-white/[0.03] border border-white/10" />
+      <motion.div style={{ y: y1 }} className="absolute right-[18%] bottom-[18%] h-24 w-24 rounded-full bg-black/[0.03] border border-black/10" />
 
       <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
         <Reveal>
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-1.5 text-[10px] uppercase tracking-[0.25em] text-white/70">
-            <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" /> Available for Q2 2026
+          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-black/15 px-4 py-1.5 text-[10px] uppercase tracking-[0.25em] text-black/70">
+            <span className="h-1.5 w-1.5 rounded-full bg-black animate-pulse" /> Available for Q2 2026
           </div>
         </Reveal>
         <Reveal delay={0.1}>
@@ -184,7 +184,7 @@ function Hero() {
           </h1>
         </Reveal>
         <Reveal delay={0.3}>
-          <p className="mx-auto mt-8 max-w-xl text-base md:text-lg text-white/60 leading-relaxed">
+          <p className="mx-auto mt-8 max-w-xl text-base md:text-lg text-black/60 leading-relaxed">
             From startups to enterprises, I build AI systems that automate,
             accelerate and scale operations.
           </p>
@@ -192,13 +192,13 @@ function Hero() {
         <Reveal delay={0.5}>
           <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
             <Magnetic>
-              <a href="#portfolio" className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-white px-7 py-4 text-xs uppercase tracking-[0.2em] text-black transition-transform hover:scale-105">
+              <a href="#portfolio" className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-black px-7 py-4 text-xs uppercase tracking-[0.2em] text-white transition-transform hover:scale-105">
                 <span className="relative z-10">View Portfolio</span>
                 <ArrowRight className="relative z-10 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </a>
             </Magnetic>
             <Magnetic>
-              <a href="#contact" className="inline-flex items-center gap-3 rounded-full border border-white/30 px-7 py-4 text-xs uppercase tracking-[0.2em] transition-all hover:bg-white hover:text-black hover:scale-105">
+              <a href="#contact" className="inline-flex items-center gap-3 rounded-full border border-black/30 px-7 py-4 text-xs uppercase tracking-[0.2em] transition-all hover:bg-black hover:text-white hover:scale-105">
                 Book Strategy Call
               </a>
             </Magnetic>
@@ -209,7 +209,7 @@ function Hero() {
       <motion.div
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-[0.3em] text-white/40"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-[0.3em] text-black/40"
       >
         Scroll
       </motion.div>
@@ -222,8 +222,8 @@ function SectionTitle({ eyebrow, title, subtitle }: { eyebrow: string; title: st
   return (
     <div className="mb-20 max-w-3xl">
       <Reveal>
-        <div className="mb-6 flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-white/50">
-          <span className="h-px w-8 bg-white/40" /> {eyebrow}
+        <div className="mb-6 flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-black/50">
+          <span className="h-px w-8 bg-black/40" /> {eyebrow}
         </div>
       </Reveal>
       <Reveal delay={0.1}>
@@ -231,7 +231,7 @@ function SectionTitle({ eyebrow, title, subtitle }: { eyebrow: string; title: st
       </Reveal>
       {subtitle && (
         <Reveal delay={0.2}>
-          <p className="mt-6 max-w-xl text-base text-white/60 leading-relaxed">{subtitle}</p>
+          <p className="mt-6 max-w-xl text-base text-black/60 leading-relaxed">{subtitle}</p>
         </Reveal>
       )}
     </div>
@@ -265,20 +265,20 @@ function PortfolioCard({ item, i }: { item: typeof portfolioItems[number]; i: nu
         style={{ rotateX: rx, rotateY: ry, transformPerspective: 1000 }}
         whileHover={{ scale: 1.04, y: -8 }}
         transition={{ type: "spring", stiffness: 200, damping: 20 }}
-        className="group relative overflow-hidden rounded-3xl border border-white/15 bg-white/[0.02] backdrop-blur-sm p-8 md:p-10 min-h-[420px] flex flex-col justify-between"
+        className="group relative overflow-hidden rounded-3xl border border-black/15 bg-black/[0.02] backdrop-blur-sm p-8 md:p-10 min-h-[420px] flex flex-col justify-between"
       >
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,50%),rgba(255,255,255,0.08),transparent_60%)]" />
-        <div className="flex justify-between text-[10px] uppercase tracking-[0.25em] text-white/50">
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,50%),rgba(0,0,0,0.08),transparent_60%)]" />
+        <div className="flex justify-between text-[10px] uppercase tracking-[0.25em] text-black/50">
           <span>{item.tag}</span>
           <span>{item.year}</span>
         </div>
         <div>
           <h3 className="font-display text-3xl md:text-4xl leading-tight mb-6">{item.title}</h3>
-          <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/70 group-hover:text-white transition">
+          <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-black/70 group-hover:text-black transition">
             View Case <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
           </div>
         </div>
-        <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full border border-white/10 transition-transform duration-700 group-hover:scale-150" />
+        <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full border border-black/10 transition-transform duration-700 group-hover:scale-150" />
       </motion.div>
     </Reveal>
   );
@@ -299,14 +299,14 @@ const clientLogos = ["Stripe", "Notion", "Linear", "Vercel", "Anthropic", "OpenA
 function Marquee({ items, reverse = false }: { items: string[]; reverse?: boolean }) {
   return (
     <div className="group relative overflow-hidden py-6">
-      <div className="absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-black to-transparent" />
-      <div className="absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-black to-transparent" />
+      <div className="absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-white to-transparent" />
+      <div className="absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-white to-transparent" />
       <div
         className="flex w-max gap-16 animate-marquee group-hover:[animation-play-state:paused]"
         style={{ animationDirection: reverse ? "reverse" : "normal" }}
       >
         {[...items, ...items].map((logo, i) => (
-          <div key={i} className="font-display text-2xl md:text-3xl text-white/40 hover:text-white transition whitespace-nowrap">
+          <div key={i} className="font-display text-2xl md:text-3xl text-black/40 hover:text-black transition whitespace-nowrap">
             {logo}
           </div>
         ))}
@@ -318,7 +318,7 @@ function Marquee({ items, reverse = false }: { items: string[]; reverse?: boolea
 /* ---------------- Page ---------------- */
 export default function Home() {
   return (
-    <main className="relative bg-black text-white overflow-x-hidden">
+    <main className="relative bg-white text-black overflow-x-hidden">
       <CursorSpotlight />
       <ScrollProgress />
       <Navbar />
@@ -340,7 +340,7 @@ export default function Home() {
       </section>
 
       {/* SERVICES */}
-      <section id="services" className="relative px-6 py-32 md:py-40 border-t border-white/10">
+      <section id="services" className="relative px-6 py-32 md:py-40 border-t border-black/10">
         <div className="mx-auto max-w-7xl">
           <SectionTitle eyebrow="Services" title="Four ways we work together." />
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -349,14 +349,14 @@ export default function Home() {
                 <motion.div
                   whileHover={{ y: -10 }}
                   transition={{ type: "spring", stiffness: 200, damping: 18 }}
-                  className="group relative h-full rounded-3xl border border-white/15 bg-[#050505] p-8 transition-all duration-500 hover:border-white hover:shadow-[0_0_40px_-10px_rgba(255,255,255,0.4)]"
+                  className="group relative h-full rounded-3xl border border-black/15 bg-[#fafafa] p-8 transition-all duration-500 hover:border-black hover:shadow-[0_0_40px_-10px_rgba(0,0,0,0.4)]"
                 >
-                  <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.8 }} className="mb-8 inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/20">
+                  <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.8 }} className="mb-8 inline-flex h-12 w-12 items-center justify-center rounded-full border border-black/20">
                     <s.icon className="h-5 w-5" />
                   </motion.div>
-                  <div className="text-[10px] uppercase tracking-[0.25em] text-white/40 mb-3">0{i + 1}</div>
+                  <div className="text-[10px] uppercase tracking-[0.25em] text-black/40 mb-3">0{i + 1}</div>
                   <h3 className="font-display text-2xl mb-4">{s.title}</h3>
-                  <p className="text-sm text-white/55 leading-relaxed">{s.desc}</p>
+                  <p className="text-sm text-black/55 leading-relaxed">{s.desc}</p>
                 </motion.div>
               </Reveal>
             ))}
@@ -365,7 +365,7 @@ export default function Home() {
       </section>
 
       {/* PRESS */}
-      <section id="press" className="relative py-32 border-t border-white/10">
+      <section id="press" className="relative py-32 border-t border-black/10">
         <div className="mx-auto max-w-7xl px-6 mb-12">
           <SectionTitle eyebrow="In The Press" title="Featured in." />
         </div>
@@ -373,7 +373,7 @@ export default function Home() {
       </section>
 
       {/* SOCIAL IMPACT */}
-      <section id="social-impact" className="relative px-6 py-32 md:py-40 border-t border-white/10">
+      <section id="social-impact" className="relative px-6 py-32 md:py-40 border-t border-black/10">
         <div className="mx-auto max-w-7xl">
           <SectionTitle eyebrow="Social Impact" title="Giving knowledge back." />
           <div className="grid gap-6 md:grid-cols-3">
@@ -383,13 +383,13 @@ export default function Home() {
               { t: "Community Projects", d: "Open source tools and shared infrastructure for independent builders." },
             ].map((c, i) => (
               <Reveal key={c.t} delay={i * 0.1}>
-                <div className="group relative overflow-hidden rounded-3xl border border-white/15 bg-[#050505] p-10 min-h-[360px] flex flex-col justify-between transition-all duration-500 hover:border-white">
-                  <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]" />
-                  <div className="relative text-[10px] uppercase tracking-[0.3em] text-white/50 group-hover:text-black/60 transition">0{i + 1}</div>
+                <div className="group relative overflow-hidden rounded-3xl border border-black/15 bg-[#fafafa] p-10 min-h-[360px] flex flex-col justify-between transition-all duration-500 hover:border-black">
+                  <div className="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]" />
+                  <div className="relative text-[10px] uppercase tracking-[0.3em] text-black/50 group-hover:text-white/60 transition">0{i + 1}</div>
                   <div className="relative">
-                    <h3 className="font-display text-3xl md:text-4xl mb-4 group-hover:text-black transition">{c.t}</h3>
-                    <p className="text-sm text-white/55 group-hover:text-black/70 leading-relaxed mb-6 transition">{c.d}</p>
-                    <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] group-hover:text-black transition">
+                    <h3 className="font-display text-3xl md:text-4xl mb-4 group-hover:text-white transition">{c.t}</h3>
+                    <p className="text-sm text-black/55 group-hover:text-white/70 leading-relaxed mb-6 transition">{c.d}</p>
+                    <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] group-hover:text-white transition">
                       Explore <ArrowUpRight className="h-4 w-4" />
                     </div>
                   </div>
@@ -401,25 +401,25 @@ export default function Home() {
       </section>
 
       {/* MASTER GUIDE */}
-      <section className="px-6 py-32 md:py-40 border-t border-white/10">
+      <section className="px-6 py-32 md:py-40 border-t border-black/10">
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-[#050505] p-12 md:p-20 text-center">
+            <div className="relative overflow-hidden rounded-3xl border border-black/20 bg-[#fafafa] p-12 md:p-20 text-center">
               <div className="absolute inset-0 grid-bg opacity-40" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,#000_80%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,#fff_80%)]" />
               <div className="relative">
-                <div className="mb-6 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-white/50">
-                  <span className="h-px w-8 bg-white/40" /> Master Guide
+                <div className="mb-6 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-black/50">
+                  <span className="h-px w-8 bg-black/40" /> Master Guide
                 </div>
                 <h2 className="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.05] max-w-3xl mx-auto">
                   Unlock The Full <em className="italic font-light">Potential</em> Of AI
                 </h2>
-                <p className="mt-8 max-w-xl mx-auto text-white/60">
+                <p className="mt-8 max-w-xl mx-auto text-black/60">
                   A free, in-depth guide to expert prompt engineering, agentic systems, and production deployment.
                 </p>
                 <div className="mt-12 inline-block">
                   <Magnetic>
-                    <a href="#" className="group inline-flex items-center gap-3 rounded-full border border-white/30 px-8 py-4 text-xs uppercase tracking-[0.2em] transition-all hover:bg-white hover:text-black hover:scale-105">
+                    <a href="#" className="group inline-flex items-center gap-3 rounded-full border border-black/30 px-8 py-4 text-xs uppercase tracking-[0.2em] transition-all hover:bg-black hover:text-white hover:scale-105">
                       Download Free Guide <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </a>
                   </Magnetic>
@@ -431,7 +431,7 @@ export default function Home() {
       </section>
 
       {/* CLIENTS */}
-      <section className="py-32 border-t border-white/10">
+      <section className="py-32 border-t border-black/10">
         <div className="mx-auto max-w-7xl px-6 mb-12">
           <SectionTitle eyebrow="Happy Clients" title="Trusted by leading teams." />
         </div>
@@ -439,10 +439,10 @@ export default function Home() {
       </section>
 
       {/* FUN FACT */}
-      <section className="px-6 py-32 md:py-40 border-t border-white/10">
+      <section className="px-6 py-32 md:py-40 border-t border-black/10">
         <div className="mx-auto max-w-7xl">
           <SectionTitle eyebrow="Fun Facts" title="By the numbers." />
-          <div className="grid gap-px bg-white/10 md:grid-cols-4 border border-white/10 rounded-3xl overflow-hidden">
+          <div className="grid gap-px bg-black/10 md:grid-cols-4 border border-black/10 rounded-3xl overflow-hidden">
             {[
               { n: 50, s: "+", l: "Projects Shipped" },
               { n: 4, s: "", l: "Continents Served" },
@@ -450,11 +450,11 @@ export default function Home() {
               { n: 100, s: "+", l: "Workshops Led" },
             ].map((f, i) => (
               <Reveal key={f.l} delay={i * 0.1}>
-                <div className="bg-black p-10 md:p-14 h-full">
+                <div className="bg-white p-10 md:p-14 h-full">
                   <div className="font-display text-6xl md:text-7xl mb-4">
                     <Counter to={f.n} suffix={f.s} />
                   </div>
-                  <div className="text-xs uppercase tracking-[0.25em] text-white/50">{f.l}</div>
+                  <div className="text-xs uppercase tracking-[0.25em] text-black/50">{f.l}</div>
                 </div>
               </Reveal>
             ))}
@@ -463,27 +463,27 @@ export default function Home() {
       </section>
 
       {/* BLOG */}
-      <section className="px-6 py-32 md:py-40 border-t border-white/10">
+      <section className="px-6 py-32 md:py-40 border-t border-black/10">
         <div className="mx-auto max-w-7xl">
           <SectionTitle eyebrow="Journal" title="Our Blogs." />
           <Reveal>
-            <a href="#" className="group relative block overflow-hidden rounded-3xl border border-white/15">
+            <a href="#" className="group relative block overflow-hidden rounded-3xl border border-black/15">
               <div className="grid md:grid-cols-2">
-                <div className="relative aspect-[4/3] md:aspect-auto overflow-hidden bg-[#050505]">
+                <div className="relative aspect-[4/3] md:aspect-auto overflow-hidden bg-[#fafafa]">
                   <div className="absolute inset-0 grid-bg transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(255,255,255,0.15),transparent_60%)] transition-transform duration-700 group-hover:scale-125" />
-                  <div className="absolute bottom-6 left-6 font-display text-7xl text-white/10">01</div>
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(0,0,0,0.15),transparent_60%)] transition-transform duration-700 group-hover:scale-125" />
+                  <div className="absolute bottom-6 left-6 font-display text-7xl text-black/10">01</div>
                 </div>
-                <div className="p-10 md:p-14 flex flex-col justify-between bg-[#050505]">
+                <div className="p-10 md:p-14 flex flex-col justify-between bg-[#fafafa]">
                   <div>
-                    <div className="text-[10px] uppercase tracking-[0.3em] text-white/50 mb-6">Ashutosh Upadhyay · March 28, 2025</div>
+                    <div className="text-[10px] uppercase tracking-[0.3em] text-black/50 mb-6">Ashutosh Upadhyay · March 28, 2025</div>
                     <h3 className="font-display text-4xl md:text-5xl leading-[1.05] mb-6">Man's Garden Of Computation</h3>
-                    <p className="text-white/55 leading-relaxed">An exploration of how human intuition shapes the architectures we build — and how those same systems are quietly reshaping us in return.</p>
+                    <p className="text-black/55 leading-relaxed">An exploration of how human intuition shapes the architectures we build — and how those same systems are quietly reshaping us in return.</p>
                   </div>
                   <div className="mt-10 inline-flex items-center gap-3 text-xs uppercase tracking-[0.2em]">
                     Read More
-                    <span className="relative block h-px w-12 bg-white/40 overflow-hidden">
-                      <span className="absolute inset-0 bg-white translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
+                    <span className="relative block h-px w-12 bg-black/40 overflow-hidden">
+                      <span className="absolute inset-0 bg-black translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
                     </span>
                   </div>
                 </div>
@@ -492,7 +492,7 @@ export default function Home() {
           </Reveal>
           <div className="mt-12 text-center">
             <Magnetic>
-              <a href="#" className="inline-flex items-center gap-2 rounded-full border border-white/30 px-7 py-3.5 text-xs uppercase tracking-[0.2em] transition-all hover:bg-white hover:text-black hover:scale-105">
+              <a href="#" className="inline-flex items-center gap-2 rounded-full border border-black/30 px-7 py-3.5 text-xs uppercase tracking-[0.2em] transition-all hover:bg-black hover:text-white hover:scale-105">
                 See All Posts
               </a>
             </Magnetic>
@@ -501,34 +501,34 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer id="contact" className="relative border-t border-white/10 px-6 pt-32 pb-12">
+      <footer id="contact" className="relative border-t border-black/10 px-6 pt-32 pb-12">
         <div className="mx-auto max-w-7xl">
           <Reveal>
             <h2 className="font-display text-6xl md:text-8xl lg:text-[10rem] leading-[0.9] tracking-tight mb-20">
               Let's <em className="italic font-light">build</em><br />something rare.
             </h2>
           </Reveal>
-          <div className="grid gap-12 md:grid-cols-4 border-t border-white/10 pt-16">
+          <div className="grid gap-12 md:grid-cols-4 border-t border-black/10 pt-16">
             <div className="md:col-span-2">
               <div className="font-display text-3xl mb-2">ASHU.AI</div>
-              <p className="text-white/50 text-sm max-w-sm mt-4">AI builder, consultant and eternal tinkerer. Turning AI from buzzword into competitive edge.</p>
+              <p className="text-black/50 text-sm max-w-sm mt-4">AI builder, consultant and eternal tinkerer. Turning AI from buzzword into competitive edge.</p>
             </div>
             <div>
-              <div className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-5">Contact</div>
+              <div className="text-[10px] uppercase tracking-[0.3em] text-black/40 mb-5">Contact</div>
               <ul className="space-y-3 text-sm">
-                <li><a className="story-link inline-block relative group" href="mailto:info@ashu.ai">info@ashu.ai<span className="absolute -bottom-0.5 left-0 h-px w-0 bg-white group-hover:w-full transition-all duration-300" /></a></li>
-                <li className="text-white/50">Press: palack@thealgohype</li>
+                <li><a className="story-link inline-block relative group" href="mailto:info@ashu.ai">info@ashu.ai<span className="absolute -bottom-0.5 left-0 h-px w-0 bg-black group-hover:w-full transition-all duration-300" /></a></li>
+                <li className="text-black/50">Press: palack@thealgohype</li>
               </ul>
             </div>
             <div>
-              <div className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-5">Social</div>
+              <div className="text-[10px] uppercase tracking-[0.3em] text-black/40 mb-5">Social</div>
               <ul className="space-y-3 text-sm">
-                <li><a className="group inline-flex items-center gap-2 relative" href="#"><Linkedin className="h-4 w-4" /> LinkedIn<span className="absolute -bottom-0.5 left-6 h-px w-0 bg-white group-hover:w-[calc(100%-1.5rem)] transition-all duration-300" /></a></li>
-                <li><a className="group inline-flex items-center gap-2 relative" href="#"><Twitter className="h-4 w-4" /> X<span className="absolute -bottom-0.5 left-6 h-px w-0 bg-white group-hover:w-[calc(100%-1.5rem)] transition-all duration-300" /></a></li>
+                <li><a className="group inline-flex items-center gap-2 relative" href="#"><Linkedin className="h-4 w-4" /> LinkedIn<span className="absolute -bottom-0.5 left-6 h-px w-0 bg-black group-hover:w-[calc(100%-1.5rem)] transition-all duration-300" /></a></li>
+                <li><a className="group inline-flex items-center gap-2 relative" href="#"><Twitter className="h-4 w-4" /> X<span className="absolute -bottom-0.5 left-6 h-px w-0 bg-black group-hover:w-[calc(100%-1.5rem)] transition-all duration-300" /></a></li>
               </ul>
             </div>
           </div>
-          <div className="mt-20 flex flex-col md:flex-row justify-between gap-4 text-xs text-white/40">
+          <div className="mt-20 flex flex-col md:flex-row justify-between gap-4 text-xs text-black/40">
             <div>© {new Date().getFullYear()} Ashu.AI — All rights reserved.</div>
             <div>Crafted with intent.</div>
           </div>
