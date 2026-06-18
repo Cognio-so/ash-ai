@@ -747,6 +747,10 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      <ProjectModal project={activeProject} onClose={() => setActiveProject(null)} />
+
+      <Dock items={dockItems} panelHeight={68} baseItemSize={50} magnification={72} />
     </main>
   );
 }
