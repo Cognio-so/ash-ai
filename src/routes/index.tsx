@@ -1,29 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
+import AshuPortfolio from "@/components/AshuPortfolio";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Ashu.AI — AI Builder, Consultant & Strategist" },
+      { name: "description", content: "I turn AI into business advantage. Production-grade AI systems, automation, and strategic consulting for startups and enterprises." },
+      { property: "og:title", content: "Ashu.AI — AI Builder & Consultant" },
+      { property: "og:description", content: "AI systems that automate, accelerate and scale operations." },
+      { property: "og:type", content: "website" },
     ],
   }),
-  component: Index,
+  component: AshuPortfolio,
 });
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
