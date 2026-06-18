@@ -549,9 +549,8 @@ export default function Home() {
             ))}
           </div>
         </div>
-          </div>
-        </div>
       </section>
+
 
       {/* SERVICES */}
       <section id="services" className="relative px-6 py-32 md:py-40 border-t border-black/10">
