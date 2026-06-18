@@ -513,6 +513,20 @@ function Marquee({ items, reverse = false }: { items: string[]; reverse?: boolea
 
 /* ---------------- Page ---------------- */
 export default function Home() {
+  const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  const dockItems = [
+    { icon: <HomeIcon size={20} color="#fff" />, label: "Home", onClick: () => scrollTo("home") },
+    { icon: <Briefcase size={20} color="#fff" />, label: "Portfolio", onClick: () => scrollTo("portfolio") },
+    { icon: <Wrench size={20} color="#fff" />, label: "Services", onClick: () => scrollTo("services") },
+    { icon: <Newspaper size={20} color="#fff" />, label: "Press", onClick: () => scrollTo("press") },
+    { icon: <HeartHandshake size={20} color="#fff" />, label: "Social Impact", onClick: () => scrollTo("social-impact") },
+    { icon: <Mail size={20} color="#fff" />, label: "Contact", onClick: () => scrollTo("contact") },
+  ];
+
   return (
     <main className="relative bg-white text-black overflow-x-hidden">
       <CursorSpotlight />
@@ -527,10 +541,14 @@ export default function Home() {
           <SectionTitle
             eyebrow="Selected Work"
             title="AI Systems. Automation. Transformation."
-            subtitle="A curated selection of recent engagements — from venture-backed startups to global enterprises."
+            subtitle="A curated selection of recent engagements — from venture-backed startups to global enterprises. Click any project to read the full case study."
           />
           <div className="grid gap-6 md:grid-cols-2">
-            {portfolioItems.map((item, i) => <PortfolioCard key={item.title} item={item} i={i} />)}
+            {portfolioItems.map((item, i) => (
+              <PortfolioCard key={item.title} item={item} i={i} onOpen={() => setActiveProject(item)} />
+            ))}
+          </div>
+        </div>
           </div>
         </div>
       </section>
