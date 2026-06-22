@@ -22,6 +22,8 @@ import {
 import BlurText from "./BlurText";
 import CircularGallery from "./CircularGallery";
 import KnowledgeSubPage from "./KnowledgeSubPage";
+import TeamMemberPage, { teamMembers } from "./TeamMemberPage";
+
 
 const Linkedin = (p: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
@@ -173,13 +175,15 @@ function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
 /* ---------------- Brand mark ---------------- */
 function AshuLogo({ className = "" }: { className?: string }) {
   return (
-    <span
-      className={`inline-flex items-center font-sans text-2xl font-semibold tracking-[0.14em] text-black md:text-[28px] ${className}`}
-    >
-      ASHU.AI
-    </span>
+    <img
+      src="/ashu-ai-navbar-logo.png"
+      alt="Ashu.AI"
+      className={`h-12 w-auto object-contain ${className}`}
+      style={{ imageRendering: "crisp-edges" }}
+    />
   );
 }
+
 
 /* ---------------- Navbar ---------------- */
 function Navbar() {
@@ -474,35 +478,36 @@ const portfolioItems: Project[] = [
 const galleryItems = [
   {
     image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=90&sat=-100",
-    text: "Founder Strategy",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=90&sat=-100",
-    text: "AI Operator",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=90&sat=-100",
-    text: "Product Lead",
-  },
-  {
-    image:
       "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=1200&q=90&sat=-100",
     text: "Automation Lab",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=1200&q=90&sat=-100",
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=90&sat=-100",
     text: "Agent Systems",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=90&sat=-100",
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=90&sat=-100",
     text: "AI Products",
   },
+  {
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=90&sat=-100",
+    text: "Founder Strategy",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=1200&q=90&sat=-100",
+    text: "AI Operator",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=90&sat=-100",
+    text: "Product Lead",
+  },
 ];
+
 
 function PortfolioCard({ item, i, onOpen }: { item: Project; i: number; onOpen: () => void }) {
   const ref = useRef<HTMLButtonElement>(null);
@@ -751,6 +756,8 @@ function Marquee({ items, reverse = false }: { items: string[]; reverse?: boolea
 export default function Home() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [activeSubPage, setActiveSubPage] = useState<string | null>(null);
+  const [activeTeamMember, setActiveTeamMember] = useState<string | null>(null);
+
 
   return (
     <main className="relative bg-white text-black overflow-x-hidden">
@@ -782,8 +789,24 @@ export default function Home() {
                 fontUrl="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap"
                 font="bold 30px Orbitron"
               />
+              {/* Invisible click overlay — maps gallery slots to team members */}
+              <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+                <div className="flex gap-[clamp(60px,9vw,130px)] pointer-events-none">
+                  {teamMembers.map((member) => (
+                    <button
+                      key={member.id}
+                      onClick={() => setActiveTeamMember(member.id)}
+                      aria-label={`View ${member.name}'s profile`}
+                      title={member.name}
+                      className="pointer-events-auto w-[clamp(60px,8vw,110px)] h-[clamp(80px,12vw,160px)] rounded-xl bg-transparent border-0 cursor-pointer opacity-0 hover:opacity-100 hover:bg-white/5 transition-all duration-300"
+                      style={{ transform: "translateY(-10px)" }}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
           </Reveal>
+
           <div className="grid gap-6 md:grid-cols-2">
             {portfolioItems.map((item, i) => (
               <PortfolioCard
@@ -1019,7 +1042,7 @@ export default function Home() {
           </Reveal>
           <div className="grid gap-12 md:grid-cols-4 border-t border-black/10 pt-16">
             <div className="md:col-span-2">
-              <div className="font-display text-3xl mb-2">ASHU.AI</div>
+              <img src="/ashu-logo.png" alt="Ashu.AI" className="h-10 w-auto object-contain mb-2" />
               <p className="text-black/50 text-sm max-w-sm mt-4">
                 AI builder, consultant and eternal tinkerer. Turning AI from buzzword into
                 competitive edge.
@@ -1068,6 +1091,7 @@ export default function Home() {
 
       <ProjectModal project={activeProject} onClose={() => setActiveProject(null)} />
       <KnowledgeSubPage pageId={activeSubPage} onClose={() => setActiveSubPage(null)} />
+      <TeamMemberPage memberId={activeTeamMember} onClose={() => setActiveTeamMember(null)} />
     </main>
   );
 }
