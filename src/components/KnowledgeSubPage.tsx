@@ -168,7 +168,7 @@ const pages: PageData[] = [
     quote:
       "We build free, structured learning paths for emerging AI engineers — from curious beginners to confident builders. Every course, every mentorship session, every certificate is offered at zero cost to those who need it most.",
     heroUrl:
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=2400&q=80&sat=-100",
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=2400&q=80&sat=-100",
     topics: [
       {
         num: "01",
@@ -225,7 +225,7 @@ const pages: PageData[] = [
     quote:
       "Every post is a deliberate act of knowledge-sharing. We write to break down complexity, challenge assumptions, and give practitioners and policy-makers a shared language for what's coming next.",
     heroUrl:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=2400&q=80&sat=-100",
+      "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=2400&q=80&sat=-100",
     topics: [
       {
         num: "01",
@@ -282,7 +282,7 @@ const pages: PageData[] = [
     quote:
       "We fund, host, and maintain open infrastructure for independent AI builders — because great work shouldn't require a corporate backing. From shared GPU clusters to collaborative datasets, everything here is community-owned and community-led.",
     heroUrl:
-      "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=2400&q=80&sat=-100",
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=2400&q=80&sat=-100",
     topics: [
       {
         num: "01",
@@ -452,16 +452,16 @@ export default function KnowledgeSubPage({
           </motion.button>
 
           {/* ── Hero image ───────────────────────── */}
-          <div className="relative h-[55vh] w-full overflow-hidden bg-[#111]">
+          <div className="relative h-[38vh] sm:h-[45vh] w-full overflow-hidden bg-[#111] border-b border-black/[0.08] shadow-sm">
             <motion.img
               key={page.heroUrl}
               src={page.heroUrl}
               alt={page.label}
               loading="eager"
-              initial={{ scale: 1.06, opacity: 0 }}
+              initial={{ scale: 1.05, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="h-full w-full object-cover opacity-70 grayscale"
+              className="h-full w-full object-cover object-[center_35%] opacity-70 grayscale"
             />
             {/* bottom fade to white */}
             <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-white to-transparent" />
