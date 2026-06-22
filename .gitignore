@@ -31,3 +31,4 @@ dist-ssr
 *.sln
 *.sw?
 ash-ai-main/
+.vercel

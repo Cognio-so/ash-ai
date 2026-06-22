@@ -745,6 +745,111 @@ function Marquee({ items, reverse = false }: { items: string[]; reverse?: boolea
   );
 }
 
+function ContactForm() {
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  async function submit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setStatus("loading");
+    setMessage("");
+
+    const form = new FormData(event.currentTarget);
+    const payload = {
+      name: String(form.get("name") || ""),
+      email: String(form.get("email") || ""),
+      company: String(form.get("company") || ""),
+      service: String(form.get("service") || ""),
+      message: String(form.get("message") || ""),
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = (await response.json()) as { ok?: boolean; message?: string; error?: string };
+
+      if (!response.ok || !data.ok) {
+        throw new Error(data.error || "Unable to send request");
+      }
+
+      event.currentTarget.reset();
+      setStatus("success");
+      setMessage(data.message || "Thanks. Your request has been received.");
+    } catch (error) {
+      setStatus("error");
+      setMessage(error instanceof Error ? error.message : "Unable to send request");
+    }
+  }
+
+  return (
+    <form
+      onSubmit={submit}
+      className="grid gap-4 rounded-3xl border border-black/10 bg-[#fafafa] p-5"
+    >
+      <div className="grid gap-4 md:grid-cols-2">
+        <input
+          name="name"
+          required
+          placeholder="Name"
+          className="h-12 rounded-2xl border border-black/10 bg-white px-4 text-sm outline-none transition focus:border-black"
+        />
+        <input
+          name="email"
+          required
+          type="email"
+          placeholder="Email"
+          className="h-12 rounded-2xl border border-black/10 bg-white px-4 text-sm outline-none transition focus:border-black"
+        />
+      </div>
+      <div className="grid gap-4 md:grid-cols-2">
+        <input
+          name="company"
+          placeholder="Company"
+          className="h-12 rounded-2xl border border-black/10 bg-white px-4 text-sm outline-none transition focus:border-black"
+        />
+        <select
+          name="service"
+          className="h-12 rounded-2xl border border-black/10 bg-white px-4 text-sm text-black/70 outline-none transition focus:border-black"
+          defaultValue=""
+        >
+          <option value="" disabled>
+            Service
+          </option>
+          <option>AI Development</option>
+          <option>Automation Systems</option>
+          <option>AI Consulting</option>
+          <option>Corporate Training</option>
+        </select>
+      </div>
+      <textarea
+        name="message"
+        required
+        rows={5}
+        maxLength={2000}
+        placeholder="Tell me what you want to build"
+        className="resize-none rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm outline-none transition focus:border-black"
+      />
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-black px-6 text-xs font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          {status === "loading" ? "Sending" : "Send Request"}
+          <ArrowRight className="h-4 w-4" />
+        </button>
+        {message && (
+          <p className={`text-sm ${status === "success" ? "text-emerald-700" : "text-red-700"}`}>
+            {message}
+          </p>
+        )}
+      </div>
+    </form>
+  );
+}
 /* ---------------- Page ---------------- */
 export default function Home() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
@@ -1008,6 +1113,19 @@ export default function Home() {
               something rare.
             </h2>
           </Reveal>
+          <Reveal>
+            <div className="mb-16 grid gap-8 border-t border-black/10 pt-12 md:grid-cols-[0.8fr_1.2fr] md:items-start">
+              <div>
+                <div className="mb-5 text-[10px] uppercase tracking-[0.3em] text-black/40">
+                  Start a project
+                </div>
+                <p className="max-w-sm text-sm leading-relaxed text-black/55">
+                  Share the build, workflow, or AI system you want to bring online.
+                </p>
+              </div>
+              <ContactForm />
+            </div>
+          </Reveal>{" "}
           <div className="grid gap-12 md:grid-cols-4 border-t border-black/10 pt-16">
             <div className="md:col-span-2">
               <div className="font-display text-3xl mb-2">ASHU.AI</div>
