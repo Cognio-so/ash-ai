@@ -64,7 +64,8 @@
     border-color: var(--color-border);
   }
 
-  html, body {
+  html,
+  body {
     background: #fff;
     color: #000;
     font-family: var(--font-sans);
@@ -83,8 +84,12 @@
 }
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @utility animate-marquee {
@@ -93,7 +98,7 @@
 
 @utility grid-bg {
   background-image:
-    linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px);
-  background-size: 64px 64px;
+    linear-gradient(to right, rgba(0, 0, 0, 0.115) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.115) 1px, transparent 1px);
+  background-size: 48px 48px;
 }

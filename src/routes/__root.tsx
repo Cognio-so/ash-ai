@@ -78,22 +78,45 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "ashu-ai" },
-      { name: "description", content: "AI Alchemy is a premium AI consultant portfolio website showcasing AI solutions and expertise." },
+      {
+        name: "description",
+        content:
+          "AI Alchemy is a premium AI consultant portfolio website showcasing AI solutions and expertise.",
+      },
       { name: "author", content: "Lovable" },
       { property: "og:title", content: "ashu-ai" },
-      { property: "og:description", content: "AI Alchemy is a premium AI consultant portfolio website showcasing AI solutions and expertise." },
+      {
+        property: "og:description",
+        content:
+          "AI Alchemy is a premium AI consultant portfolio website showcasing AI solutions and expertise.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "ashu-ai" },
-      { name: "twitter:description", content: "AI Alchemy is a premium AI consultant portfolio website showcasing AI solutions and expertise." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a51ae410-1ba6-4eca-82fd-c067794aed41/id-preview-f93a9ec1--8ef9b397-d3ab-43da-8814-f41e99f6fdf1.lovable.app-1781766591389.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a51ae410-1ba6-4eca-82fd-c067794aed41/id-preview-f93a9ec1--8ef9b397-d3ab-43da-8814-f41e99f6fdf1.lovable.app-1781766591389.png" },
+      {
+        name: "twitter:description",
+        content:
+          "AI Alchemy is a premium AI consultant portfolio website showcasing AI solutions and expertise.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a51ae410-1ba6-4eca-82fd-c067794aed41/id-preview-f93a9ec1--8ef9b397-d3ab-43da-8814-f41e99f6fdf1.lovable.app-1781766591389.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a51ae410-1ba6-4eca-82fd-c067794aed41/id-preview-f93a9ec1--8ef9b397-d3ab-43da-8814-f41e99f6fdf1.lovable.app-1781766591389.png",
+      },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap",
+      },
       { rel: "stylesheet", href: appCss },
     ],
   }),
