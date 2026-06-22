@@ -237,12 +237,8 @@ function Hero() {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Grid background — hidden on mobile for clean look */}
-      <div className="hidden md:block absolute inset-0">
-        <InteractiveGridBackground />
-      </div>
-      {/* Simple static background for mobile */}
-      <div className="block md:hidden absolute inset-0 bg-[#fafafa]" />
+      {/* Grid background — visible on all screens */}
+      <InteractiveGridBackground />
       {/* floating shapes — desktop only */}
       <motion.div
         style={{ y: y1 }}
