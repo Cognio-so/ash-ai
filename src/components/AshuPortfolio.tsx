@@ -237,21 +237,26 @@ function Hero() {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      <InteractiveGridBackground />
-      {/* floating shapes */}
+      {/* Grid background — hidden on mobile for clean look */}
+      <div className="hidden md:block absolute inset-0">
+        <InteractiveGridBackground />
+      </div>
+      {/* Simple static background for mobile */}
+      <div className="block md:hidden absolute inset-0 bg-[#fafafa]" />
+      {/* floating shapes — desktop only */}
       <motion.div
         style={{ y: y1 }}
-        className="absolute left-[8%] top-[20%] h-32 w-32 rounded-full border border-black/15"
+        className="hidden md:block absolute left-[8%] top-[20%] h-32 w-32 rounded-full border border-black/15"
       />
       <motion.div
         style={{ y: y2 }}
         animate={{ rotate: 360 }}
         transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-        className="absolute right-[10%] top-[28%] h-40 w-40 border border-black/15"
+        className="hidden md:block absolute right-[10%] top-[28%] h-40 w-40 border border-black/15"
       />
       <motion.div
         style={{ y: y1 }}
-        className="absolute right-[18%] bottom-[18%] h-24 w-24 rounded-full bg-black/[0.03] border border-black/10"
+        className="hidden md:block absolute right-[18%] bottom-[18%] h-24 w-24 rounded-full bg-black/[0.03] border border-black/10"
       />
 
       <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
