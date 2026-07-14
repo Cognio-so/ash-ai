@@ -25,7 +25,8 @@ export const teamMembers: TeamMember[] = [
     tagline: "Automating the impossible, one workflow at a time.",
     bio: "Alex leads our automation division, building intelligent workflows that eliminate repetitive work across enterprise systems. With 6+ years in RPA and AI pipelines, he has scaled operations for 20+ clients globally, saving thousands of hours monthly.",
     skills: ["RPA", "n8n", "Make.com", "Python", "LLM Pipelines", "Zapier"],
-    image: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=1200&q=90&sat=-100",
+    image:
+      "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=1600&q=92",
     social: [
       { platform: "LinkedIn", url: "#" },
       { platform: "GitHub", url: "#" },
@@ -39,7 +40,8 @@ export const teamMembers: TeamMember[] = [
     tagline: "Teaching machines to think, act, and decide.",
     bio: "Omar architects multi-agent AI systems from orchestration layers to tool-use pipelines. His agent infrastructure runs at scale for thousands of daily users. He obsesses over reliability, speed, and making AI actually useful in the real world.",
     skills: ["LangChain", "AutoGen", "Claude API", "FastAPI", "RAG", "Vector DBs"],
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=90&sat=-100",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1600&q=92",
     social: [
       { platform: "LinkedIn", url: "#" },
       { platform: "GitHub", url: "#" },
@@ -54,7 +56,8 @@ export const teamMembers: TeamMember[] = [
     tagline: "Great AI products feel invisible — until they change everything.",
     bio: "Elena bridges design and AI intelligence, crafting experiences that make complex systems feel effortless. She has shipped 12+ AI-native products and specializes in human-AI interaction, zero-friction onboarding, and product intuition.",
     skills: ["Figma", "UX Research", "AI Prototyping", "Next.js", "Framer"],
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=90&sat=-100",
+    image:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=92",
     social: [
       { platform: "LinkedIn", url: "#" },
       { platform: "Twitter", url: "#" },
@@ -68,7 +71,8 @@ export const teamMembers: TeamMember[] = [
     tagline: "Strategy is just storytelling with numbers behind it.",
     bio: "Sophia works directly with founders on AI strategy, go-to-market positioning, and investor narratives. Former consultant turned AI builder, she has advised 30+ startups across 3 continents and helped raise $40M+ in funding.",
     skills: ["GTM Strategy", "Fundraising", "AI Roadmaps", "Pitch Decks", "OKRs"],
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=90&sat=-100",
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1600&q=92",
     social: [
       { platform: "LinkedIn", url: "#" },
       { platform: "Twitter", url: "#" },
@@ -82,7 +86,8 @@ export const teamMembers: TeamMember[] = [
     tagline: "Ops is the silent engine that makes AI actually work.",
     bio: "Marco ensures every AI system we ship runs flawlessly in production — monitoring, scaling, and optimizing 24/7. He brings military-grade operational discipline to AI deployment, incident response, and infrastructure resilience.",
     skills: ["DevOps", "Docker", "Supabase", "CI/CD", "Monitoring", "Cloud Infra"],
-    image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=1200&q=90&sat=-100",
+    image:
+      "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=1600&q=92",
     social: [
       { platform: "LinkedIn", url: "#" },
       { platform: "GitHub", url: "#" },
@@ -96,7 +101,8 @@ export const teamMembers: TeamMember[] = [
     tagline: "The best products are built at the intersection of empathy and data.",
     bio: "Priya owns the product roadmap end-to-end — from user research and prioritization to sprint planning and launch. With a background in behavioral design and AI systems, she ensures every feature we ship solves a real problem for real people.",
     skills: ["Product Strategy", "Roadmapping", "User Research", "Agile", "Analytics"],
-    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=90&sat=-100",
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1600&q=92",
     social: [
       { platform: "LinkedIn", url: "#" },
       { platform: "Twitter", url: "#" },
@@ -180,13 +186,17 @@ export default function TeamMemberPage({
     if (!memberId) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = prev; };
+    return () => {
+      document.body.style.overflow = prev;
+    };
   }, [memberId]);
 
   /* Escape key */
   useEffect(() => {
     if (!memberId) return;
-    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [memberId, onClose]);
@@ -204,7 +214,9 @@ export default function TeamMemberPage({
             position: "fixed",
             inset: 0,
             zIndex: 200,
-            background: "#ffffff",
+            background: "#030611",
+            backgroundImage:
+              "radial-gradient(circle at 100% 0%, rgba(99, 102, 241, 0.12) 0%, transparent 40%), radial-gradient(circle at 0% 100%, rgba(139, 92, 246, 0.1) 0%, transparent 40%)",
             overflowY: "auto",
             WebkitFontSmoothing: "antialiased",
             MozOsxFontSmoothing: "grayscale",
@@ -227,31 +239,33 @@ export default function TeamMemberPage({
               gap: 8,
               padding: "8px 18px",
               borderRadius: 40,
-              border: "1px solid rgba(0,0,0,0.18)",
-              background: "rgba(255,255,255,0.92)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              background: "rgba(15,23,42,0.8)",
               backdropFilter: "blur(12px)",
-              color: "#000000",
+              color: "#ffffff",
               fontSize: 10,
               fontWeight: 600,
               letterSpacing: "0.22em",
               textTransform: "uppercase",
               cursor: "pointer",
               transition: "border-color 0.2s, background 0.2s",
-              boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.background = "#000000";
+              (e.currentTarget as HTMLButtonElement).style.background = "#8b5cf6";
               (e.currentTarget as HTMLButtonElement).style.color = "#ffffff";
-              (e.currentTarget as HTMLButtonElement).style.borderColor = "#000000";
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "#8b5cf6";
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.92)";
-              (e.currentTarget as HTMLButtonElement).style.color = "#000000";
-              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(0,0,0,0.18)";
+              (e.currentTarget as HTMLButtonElement).style.background = "rgba(15,23,42,0.8)";
+              (e.currentTarget as HTMLButtonElement).style.color = "#ffffff";
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.1)";
             }}
           >
             <ArrowLeft size={13} />
-            <span style={{ display: "none" }} className="sm-show">Back to Team</span>
+            <span style={{ display: "none" }} className="sm-show">
+              Back to Team
+            </span>
             <style>{`.sm-show { display: inline !important; }`}</style>
           </motion.button>
 
@@ -279,16 +293,18 @@ export default function TeamMemberPage({
                   <img
                     src={member.image}
                     alt={member.name}
+                    loading="eager"
+                    decoding="async"
                     style={{
                       width: "100%",
                       aspectRatio: "4/5",
                       objectFit: "cover",
                       objectPosition: "center top",
                       borderRadius: 16,
-                      filter: "grayscale(100%) contrast(1.05) brightness(0.95)",
-                      border: "1px solid rgba(0,0,0,0.08)",
+                      filter: "saturate(1.05)",
+                      border: "1px solid rgba(255,255,255,0.1)",
                       display: "block",
-                      boxShadow: "0 20px 60px -20px rgba(0,0,0,0.18)",
+                      boxShadow: "0 20px 60px -20px rgba(0,0,0,0.5)",
                     }}
                   />
                 ) : (
@@ -302,7 +318,7 @@ export default function TeamMemberPage({
                     fontSize: 10,
                     letterSpacing: "0.2em",
                     textTransform: "uppercase",
-                    color: "rgba(0,0,0,0.4)",
+                    color: "rgba(255,255,255,0.5)",
                     fontFamily: "var(--font-sans, sans-serif)",
                   }}
                 >
@@ -324,7 +340,7 @@ export default function TeamMemberPage({
                   fontSize: 10,
                   letterSpacing: "0.25em",
                   textTransform: "uppercase",
-                  color: "rgba(0,0,0,0.38)",
+                  color: "rgba(255,255,255,0.4)",
                   marginBottom: 20,
                   fontFamily: "var(--font-sans, sans-serif)",
                   display: "flex",
@@ -332,7 +348,14 @@ export default function TeamMemberPage({
                   gap: 10,
                 }}
               >
-                <span style={{ display: "inline-block", width: 28, height: 1, background: "rgba(0,0,0,0.3)" }} />
+                <span
+                  style={{
+                    display: "inline-block",
+                    width: 28,
+                    height: 1,
+                    background: "rgba(255,255,255,0.2)",
+                  }}
+                />
                 {member.label}
               </div>
 
@@ -342,7 +365,7 @@ export default function TeamMemberPage({
                   fontFamily: "'Playfair Display', Georgia, serif",
                   fontSize: "clamp(2rem, 4vw, 2.8rem)",
                   fontWeight: 400,
-                  color: "#0a0a0a",
+                  color: "#ffffff",
                   lineHeight: 1.1,
                   letterSpacing: "-0.02em",
                   margin: "0 0 10px",
@@ -357,7 +380,7 @@ export default function TeamMemberPage({
               <div
                 style={{
                   fontSize: "1rem",
-                  color: "rgba(0,0,0,0.45)",
+                  color: "rgba(255,255,255,0.5)",
                   fontWeight: 400,
                   marginBottom: 18,
                   fontFamily: "var(--font-sans, sans-serif)",
@@ -373,7 +396,7 @@ export default function TeamMemberPage({
                   fontFamily: "'Playfair Display', Georgia, serif",
                   fontStyle: "italic",
                   fontSize: "1.1rem",
-                  color: "rgba(0,0,0,0.5)",
+                  color: "#a78bfa",
                   lineHeight: 1.65,
                   marginBottom: 28,
                 }}
@@ -386,7 +409,7 @@ export default function TeamMemberPage({
                 style={{
                   width: "100%",
                   height: 1,
-                  background: "rgba(0,0,0,0.08)",
+                  background: "rgba(255,255,255,0.1)",
                   marginBottom: 28,
                 }}
               />
@@ -396,7 +419,7 @@ export default function TeamMemberPage({
                 style={{
                   fontSize: "0.925rem",
                   lineHeight: 1.9,
-                  color: "rgba(0,0,0,0.62)",
+                  color: "rgba(255,255,255,0.8)",
                   marginBottom: 32,
                   fontFamily: "var(--font-sans, sans-serif)",
                   WebkitFontSmoothing: "antialiased",
@@ -412,7 +435,7 @@ export default function TeamMemberPage({
                     fontSize: 10,
                     letterSpacing: "0.25em",
                     textTransform: "uppercase",
-                    color: "rgba(0,0,0,0.35)",
+                    color: "rgba(255,255,255,0.4)",
                     marginBottom: 12,
                     fontFamily: "var(--font-sans, sans-serif)",
                   }}
@@ -426,23 +449,25 @@ export default function TeamMemberPage({
                       style={{
                         padding: "5px 16px",
                         borderRadius: 20,
-                        border: "1px solid rgba(0,0,0,0.18)",
+                        border: "1px solid rgba(255,255,255,0.1)",
                         fontSize: 12,
-                        color: "rgba(0,0,0,0.6)",
+                        color: "rgba(255,255,255,0.7)",
                         fontFamily: "var(--font-sans, sans-serif)",
                         letterSpacing: "0.04em",
                         transition: "border-color 0.2s, color 0.2s, background 0.2s",
-                        background: "#fafafa",
+                        background: "rgba(255,255,255,0.05)",
                       }}
                       onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLElement).style.borderColor = "#000000";
-                        (e.currentTarget as HTMLElement).style.color = "#000000";
-                        (e.currentTarget as HTMLElement).style.background = "#f0f0f0";
+                        (e.currentTarget as HTMLElement).style.borderColor = "#8b5cf6";
+                        (e.currentTarget as HTMLElement).style.color = "#ffffff";
+                        (e.currentTarget as HTMLElement).style.background = "rgba(139,92,246,0.15)";
                       }}
                       onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,0,0,0.18)";
-                        (e.currentTarget as HTMLElement).style.color = "rgba(0,0,0,0.6)";
-                        (e.currentTarget as HTMLElement).style.background = "#fafafa";
+                        (e.currentTarget as HTMLElement).style.borderColor =
+                          "rgba(255,255,255,0.1)";
+                        (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.7)";
+                        (e.currentTarget as HTMLElement).style.background =
+                          "rgba(255,255,255,0.05)";
                       }}
                     >
                       {skill}
@@ -452,7 +477,14 @@ export default function TeamMemberPage({
               </div>
 
               {/* Divider */}
-              <div style={{ width: "100%", height: 1, background: "rgba(0,0,0,0.08)", marginBottom: 24 }} />
+              <div
+                style={{
+                  width: "100%",
+                  height: 1,
+                  background: "rgba(255,255,255,0.1)",
+                  marginBottom: 24,
+                }}
+              />
 
               {/* Social links */}
               <div>
@@ -461,7 +493,7 @@ export default function TeamMemberPage({
                     fontSize: 10,
                     letterSpacing: "0.25em",
                     textTransform: "uppercase",
-                    color: "rgba(0,0,0,0.35)",
+                    color: "rgba(255,255,255,0.4)",
                     marginBottom: 14,
                     fontFamily: "var(--font-sans, sans-serif)",
                   }}
@@ -480,7 +512,7 @@ export default function TeamMemberPage({
                         alignItems: "center",
                         gap: 7,
                         fontSize: 13,
-                        color: "rgba(0,0,0,0.5)",
+                        color: "rgba(255,255,255,0.5)",
                         textDecoration: "none",
                         fontFamily: "var(--font-sans, sans-serif)",
                         letterSpacing: "0.02em",
@@ -488,12 +520,13 @@ export default function TeamMemberPage({
                         position: "relative",
                       }}
                       onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLAnchorElement).style.color = "#000000";
+                        (e.currentTarget as HTMLAnchorElement).style.color = "#ffffff";
                         const underline = e.currentTarget.querySelector(".ul") as HTMLElement;
                         if (underline) underline.style.width = "100%";
                       }}
                       onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLAnchorElement).style.color = "rgba(0,0,0,0.5)";
+                        (e.currentTarget as HTMLAnchorElement).style.color =
+                          "rgba(255,255,255,0.5)";
                         const underline = e.currentTarget.querySelector(".ul") as HTMLElement;
                         if (underline) underline.style.width = "0%";
                       }}
@@ -508,7 +541,7 @@ export default function TeamMemberPage({
                           left: 0,
                           height: 1,
                           width: "0%",
-                          background: "rgba(0,0,0,0.6)",
+                          background: "#8b5cf6",
                           transition: "width 0.25s ease",
                         }}
                       />

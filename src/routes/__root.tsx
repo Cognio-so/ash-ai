@@ -77,27 +77,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ashu-ai" },
+      { title: "Aryan.AI — AI Builder & Consultant" },
       {
         name: "description",
         content:
-          "AI Alchemy is a premium AI consultant portfolio website showcasing AI solutions and expertise.",
+          "Aryan.AI is a premium AI builder and consultant portfolio website showcasing custom RAG, agentic systems, and operational automation.",
       },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "ashu-ai" },
+      { name: "author", content: "Aryan" },
+      { property: "og:title", content: "Aryan.AI — AI Builder & Consultant" },
       {
         property: "og:description",
         content:
-          "AI Alchemy is a premium AI consultant portfolio website showcasing AI solutions and expertise.",
+          "Aryan.AI is a premium AI builder and consultant portfolio website showcasing custom RAG, agentic systems, and operational automation.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "ashu-ai" },
+      { name: "twitter:title", content: "Aryan.AI — AI Builder & Consultant" },
       {
         name: "twitter:description",
         content:
-          "AI Alchemy is a premium AI consultant portfolio website showcasing AI solutions and expertise.",
+          "Aryan.AI is a premium AI builder and consultant portfolio website showcasing custom RAG, agentic systems, and operational automation.",
       },
       {
         property: "og:image",

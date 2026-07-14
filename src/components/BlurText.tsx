@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, type TargetAndTransition } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 type Snapshot = {
@@ -22,18 +22,26 @@ type BlurTextProps = {
   stepDuration?: number;
 };
 
-const buildKeyframes = (from: Snapshot, steps: Snapshot[]) => {
-  const keys = new Set([...Object.keys(from), ...steps.flatMap((step) => Object.keys(step))]);
-  const keyframes: Record<string, Array<string | number | undefined>> = {};
+const buildKeyframes = (from: Snapshot, steps: Snapshot[]): TargetAndTransition => {
+  const keys = new Set<keyof Snapshot>([
+    ...(Object.keys(from) as Array<keyof Snapshot>),
+    ...steps.flatMap((step) => Object.keys(step) as Array<keyof Snapshot>),
+  ]);
+  const keyframes: Record<string, Array<string | number>> = {};
 
   keys.forEach((key) => {
-    keyframes[key] = [
-      from[key as keyof Snapshot],
-      ...steps.map((step) => step[key as keyof Snapshot]),
-    ];
+    const values = [from[key], ...steps.map((step) => step[key])];
+    keyframes[key] = values.map((value, index) => {
+      if (value !== undefined) return value;
+      const previous = values
+        .slice(0, index)
+        .reverse()
+        .find((entry): entry is string | number => entry !== undefined);
+      return previous ?? "";
+    });
   });
 
-  return keyframes;
+  return keyframes as TargetAndTransition;
 };
 
 export default function BlurText({
@@ -127,3 +135,4 @@ export default function BlurText({
     </p>
   );
 }
+

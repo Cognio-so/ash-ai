@@ -1,4 +1,13 @@
-import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform } from "ogl";
+import {
+  Camera,
+  Mesh,
+  Plane,
+  Program,
+  Renderer,
+  Texture,
+  Transform,
+  type OGLRenderingContext,
+} from "ogl";
 import { useEffect, useRef } from "react";
 
 import "./CircularGallery.css";
@@ -151,7 +160,7 @@ function getFontSize(font: string) {
 }
 
 function createTextTexture(
-  gl: WebGLRenderingContext,
+  gl: OGLRenderingContext,
   text: string,
   font = "bold 30px monospace",
   color = "black",
@@ -179,7 +188,7 @@ function createTextTexture(
 }
 
 class Title {
-  gl: WebGLRenderingContext;
+  gl: OGLRenderingContext;
   plane: Mesh;
   text: string;
   textColor: string;
@@ -193,7 +202,7 @@ class Title {
     textColor = "#545050",
     font = "30px sans-serif",
   }: {
-    gl: WebGLRenderingContext;
+    gl: OGLRenderingContext;
     plane: Mesh;
     text: string;
     textColor?: string;
@@ -255,7 +264,7 @@ class Title {
 class Media {
   extra = 0;
   geometry: Plane;
-  gl: WebGLRenderingContext;
+  gl: OGLRenderingContext;
   image: string;
   index: number;
   length: number;
@@ -295,7 +304,7 @@ class Media {
     font,
   }: {
     geometry: Plane;
-    gl: WebGLRenderingContext;
+    gl: OGLRenderingContext;
     image: string;
     index: number;
     length: number;
@@ -477,7 +486,7 @@ class App {
   scroll: ScrollState;
   onCheckDebounce: () => void;
   renderer!: Renderer;
-  gl!: WebGLRenderingContext;
+  gl!: OGLRenderingContext;
   camera!: Camera;
   scene!: Transform;
   screen!: ScreenSize;
@@ -526,11 +535,13 @@ class App {
     this.renderer = new Renderer({
       alpha: true,
       antialias: true,
-      dpr: Math.min(window.devicePixelRatio || 1, 2),
+      dpr: Math.min(window.devicePixelRatio || 1, 3),
     });
-    this.gl = this.renderer.gl;
+    this.gl = this.renderer.gl as OGLRenderingContext;
     this.gl.clearColor(0, 0, 0, 0);
-    this.container.appendChild(this.gl.canvas);
+    if (this.gl.canvas instanceof HTMLCanvasElement) {
+      this.container.appendChild(this.gl.canvas);
+    }
   }
 
   createCamera() {
@@ -711,8 +722,9 @@ class App {
     window.removeEventListener("touchend", this.boundOnTouchUp);
     this.container.removeEventListener("keydown", this.boundOnKeyDown);
 
-    if (this.renderer?.gl?.canvas.parentNode) {
-      this.renderer.gl.canvas.parentNode.removeChild(this.renderer.gl.canvas);
+    const canvas = this.renderer?.gl?.canvas;
+    if (canvas instanceof HTMLCanvasElement && canvas.parentNode) {
+      canvas.parentNode.removeChild(canvas);
     }
   }
 }

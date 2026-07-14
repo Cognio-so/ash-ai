@@ -87,7 +87,7 @@ async function forwardLead(payload: Record<string, string>) {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({
-      source: "ashu.ai",
+      source: "aryan.ai",
       submittedAt: new Date().toISOString(),
       ...payload,
     }),
@@ -154,7 +154,7 @@ export async function handleApiRequest(request: Request) {
     if (url.pathname === "/api") {
       response = json({
         ok: true,
-        name: "Ashu.AI API",
+        name: "Aryan.AI API",
         endpoints: ["/api/health", "/api/contact"],
       });
     }
@@ -163,7 +163,7 @@ export async function handleApiRequest(request: Request) {
       response = json({
         ok: true,
         status: "ready",
-        service: "ashu-ai-backend",
+        service: "aryan-ai-backend",
         timestamp: new Date().toISOString(),
       });
     }
