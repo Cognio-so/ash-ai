@@ -28,6 +28,7 @@ import CircularGallery from "./CircularGallery";
 import TeamMemberPage, { teamMembers } from "./TeamMemberPage";
 import aryanPortrait from "@/assets/aryan-portrait.png";
 import aryanAboutPortrait from "@/assets/aryan-about-portrait.png";
+import inspirationIllustration from "@/assets/inspiration-philosophy-illustration.png";
 
 const Linkedin = (p: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
@@ -675,19 +676,126 @@ function Marquee({ items, reverse = false }: { items: string[]; reverse?: boolea
       <div className="absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-[#f8f4ec] to-transparent" />
       <div className="absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-[#f8f4ec] to-transparent" />
       <div
-        className="flex w-max gap-16 animate-marquee group-hover:[animation-play-state:paused]"
+        className="flex w-max items-center gap-10 animate-marquee group-hover:[animation-play-state:paused] md:gap-14"
         style={{ animationDirection: reverse ? "reverse" : "normal" }}
       >
         {[...items, ...items].map((logo, i) => (
-          <div
-            key={i}
-            className="font-display text-2xl text-[#2e2a27] transition duration-300 whitespace-nowrap md:text-3xl"
-          >
-            {logo}
+          <div key={i} className="flex items-center gap-10 md:gap-14">
+            <div className="font-display whitespace-nowrap text-2xl text-[#2e2a27] transition duration-300 md:text-3xl">
+              {logo}
+            </div>
+            <span
+              aria-hidden="true"
+              className="h-1.5 w-1.5 rounded-full bg-[#d7c6ae] shadow-[0_0_0_4px_rgba(255,248,237,0.68)]"
+            />
           </div>
         ))}
       </div>
     </div>
+  );
+}
+
+const philosophyCards = [
+  {
+    label: "PHILOSOPHY",
+    heading: "Build for People, Powered by AI",
+    content:
+      "Technology should never feel complicated. I create digital experiences that are simple, intelligent, and genuinely useful. Every interface is designed to feel effortless while every system works powerfully behind the scenes.",
+  },
+  {
+    label: "AI ENGINEERING",
+    heading: "Creating Intelligent Digital Products",
+    content:
+      "From AI agents and business automations to modern SaaS platforms, I build scalable systems that save time, automate repetitive work, and help businesses grow faster.",
+  },
+  {
+    label: "DESIGN",
+    heading: "Minimal Design. Maximum Impact.",
+    content:
+      "Great products are remembered because they feel intuitive. I combine elegant design with clean engineering to create experiences that are fast, accessible, and enjoyable.",
+  },
+  {
+    label: "VISION",
+    heading: "Building the Future with AI",
+    content:
+      "I believe artificial intelligence will become the foundation of every modern business. My goal is to build products that make advanced AI simple, practical, and available to everyone.",
+  },
+];
+
+function InspirationPhilosophy() {
+  return (
+    <section id="inspiration" className="relative px-5 py-24 md:px-6 md:py-36">
+      <div className="mx-auto max-w-[1400px]">
+        <Reveal>
+          <div className="mx-auto mb-14 max-w-4xl text-center md:mb-18">
+            <div className="mb-5 text-[10px] font-semibold uppercase tracking-[0.34em] text-[#a67c52]">
+              Inspiration & Philosophy
+            </div>
+            <h2 className="font-display text-5xl leading-[1.02] text-[#241a12] md:text-7xl">
+              The blueprint behind my work
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl text-base leading-[1.8] text-[#6f6357] md:text-xl">
+              Every product I build begins with curiosity, thoughtful design, and the belief that
+              technology should solve real-world problems beautifully.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="grid items-start gap-8 lg:grid-cols-[0.4fr_0.6fr] lg:gap-10">
+          <Reveal>
+            <div className="group space-y-6 lg:sticky lg:top-28 lg:space-y-7">
+              <div className="relative overflow-hidden rounded-[20px] border border-[#2b2117]/12 bg-[#fff8ed]/62 p-3 shadow-[0_28px_70px_rgba(67,45,24,0.14)] transition duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_34px_88px_rgba(67,45,24,0.18)]">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.62),transparent_46%)]" />
+                <img
+                  src={inspirationIllustration}
+                  alt="Sepia editorial illustration of an AI brain, neural network, code particles, and geometric innovation patterns"
+                  loading="lazy"
+                  decoding="async"
+                  className="relative aspect-[4/5] w-full rounded-[16px] object-cover object-center"
+                />
+              </div>
+              <Link
+                to="/portfolio"
+                className="group/button inline-flex w-full items-center justify-center gap-3 rounded-[20px] border border-[#2b2117]/16 bg-[#241a12] px-6 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#fff8ed] shadow-[6px_6px_0_rgba(36,26,18,0.14)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_rgba(36,26,18,0.12)]"
+              >
+                <span>Explore My Journey</span>
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/button:translate-x-1" />
+              </Link>
+            </div>
+          </Reveal>
+
+          <div className="grid gap-4 md:grid-cols-2 md:gap-5">
+            {philosophyCards.map((card, i) => (
+              <Reveal key={card.label} delay={i * 0.08}>
+                <motion.article
+                  whileHover={{ y: -8 }}
+                  transition={{ type: "spring", stiffness: 220, damping: 22 }}
+                  className="philosophy-card relative min-h-[310px] overflow-hidden rounded-[20px] border border-[#2b2117]/12 bg-[#fff8ed]/52 p-7 shadow-[0_22px_56px_rgba(67,45,24,0.1)] backdrop-blur-md md:p-8"
+                >
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.78),transparent_42%)]" />
+                  <div className="relative flex h-full flex-col justify-between gap-10">
+                    <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.28em] text-[#a67c52]">
+                      <span>{card.label}</span>
+                      <span className="font-display text-2xl tracking-normal text-[#cbb99f]">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                    <div>
+                      <h3 className="font-display text-3xl leading-tight text-[#241a12] md:text-[2.1rem]">
+                        {card.heading}
+                      </h3>
+                      <p className="mt-5 text-[15px] leading-[1.85] text-[#655846]">
+                        {card.content}
+                      </p>
+                    </div>
+                  </div>
+                </motion.article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -769,6 +877,7 @@ export default function AryanPortfolio() {
 
       <Hero />
       <AboutMe />
+      <InspirationPhilosophy />
 
       {/* PORTFOLIO SECTION */}
       <section id="portfolio" className="relative px-6 py-32 md:py-40">
