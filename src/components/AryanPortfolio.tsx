@@ -724,75 +724,67 @@ const philosophyCards = [
 
 function InspirationPhilosophy() {
   return (
-    <section id="inspiration" className="relative px-5 py-24 md:px-6 md:py-36">
-      <div className="mx-auto max-w-[1400px]">
+    <section id="inspiration" className="relative px-5 py-24 md:px-8 md:py-32">
+      <div className="mx-auto grid max-w-[1400px] gap-12 lg:grid-cols-[0.42fr_0.58fr] lg:gap-20">
         <Reveal>
-          <div className="mx-auto mb-14 max-w-4xl text-center md:mb-18">
+          <div className="lg:sticky lg:top-28">
             <div className="mb-5 text-[10px] font-semibold uppercase tracking-[0.34em] text-[#a67c52]">
               Inspiration & Philosophy
             </div>
-            <h2 className="font-display text-5xl leading-[1.02] text-[#241a12] md:text-7xl">
+            <h2 className="font-display max-w-xl text-5xl leading-[0.98] text-[#241a12] md:text-7xl">
               The blueprint behind my work
             </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-base leading-[1.8] text-[#6f6357] md:text-xl">
+            <p className="mt-7 max-w-xl text-lg leading-[1.8] text-[#6a5b49] md:text-xl">
               Every product I build begins with curiosity, thoughtful design, and the belief that
               technology should solve real-world problems beautifully.
             </p>
+
+            <Link
+              to="/portfolio"
+              className="group/button mt-10 inline-flex items-center justify-center gap-4 rounded-[3px] bg-[#241a12] px-8 py-5 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#fff8ed] shadow-[5px_5px_0_rgba(36,26,18,0.22)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_rgba(36,26,18,0.16)]"
+            >
+              <span>Explore My Journey</span>
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/button:translate-x-1" />
+            </Link>
+
+            <div className="mt-12 w-full max-w-[380px] overflow-hidden bg-[#ead7b9] p-3 shadow-[0_24px_60px_rgba(67,45,24,0.12)] md:ml-20 lg:ml-24">
+              <img
+                src={inspirationIllustration}
+                alt="Sepia editorial illustration of an AI brain, neural network, code particles, and geometric innovation patterns"
+                loading="lazy"
+                decoding="async"
+                className="aspect-square w-full object-cover object-center"
+              />
+            </div>
           </div>
         </Reveal>
 
-        <div className="grid items-start gap-8 lg:grid-cols-[0.4fr_0.6fr] lg:gap-10">
-          <Reveal>
-            <div className="group space-y-6 lg:sticky lg:top-28 lg:space-y-7">
-              <div className="relative overflow-hidden rounded-[20px] border border-[#2b2117]/12 bg-[#fff8ed]/62 p-3 shadow-[0_28px_70px_rgba(67,45,24,0.14)] transition duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_34px_88px_rgba(67,45,24,0.18)]">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.62),transparent_46%)]" />
-                <img
-                  src={inspirationIllustration}
-                  alt="Sepia editorial illustration of an AI brain, neural network, code particles, and geometric innovation patterns"
-                  loading="lazy"
-                  decoding="async"
-                  className="relative aspect-[4/5] w-full rounded-[16px] object-cover object-center"
-                />
-              </div>
-              <Link
-                to="/portfolio"
-                className="group/button inline-flex w-full items-center justify-center gap-3 rounded-[20px] border border-[#2b2117]/16 bg-[#241a12] px-6 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#fff8ed] shadow-[6px_6px_0_rgba(36,26,18,0.14)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_rgba(36,26,18,0.12)]"
+        <div className="space-y-6 lg:pt-4">
+          {philosophyCards.map((card, i) => (
+            <Reveal key={card.label} delay={i * 0.08}>
+              <motion.article
+                whileHover={{ y: -4 }}
+                transition={{ type: "spring", stiffness: 220, damping: 24 }}
+                className="relative overflow-hidden rounded-[3px] border border-[#2b2117]/12 bg-[#fbf4ea]/42 px-6 py-8 shadow-[0_18px_42px_rgba(67,45,24,0.06)] backdrop-blur-sm md:px-8 md:py-9"
               >
-                <span>Explore My Journey</span>
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/button:translate-x-1" />
-              </Link>
-            </div>
-          </Reveal>
-
-          <div className="grid gap-4 md:grid-cols-2 md:gap-5">
-            {philosophyCards.map((card, i) => (
-              <Reveal key={card.label} delay={i * 0.08}>
-                <motion.article
-                  whileHover={{ y: -8 }}
-                  transition={{ type: "spring", stiffness: 220, damping: 22 }}
-                  className="philosophy-card relative min-h-[310px] overflow-hidden rounded-[20px] border border-[#2b2117]/12 bg-[#fff8ed]/52 p-7 shadow-[0_22px_56px_rgba(67,45,24,0.1)] backdrop-blur-md md:p-8"
-                >
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.78),transparent_42%)]" />
-                  <div className="relative flex h-full flex-col justify-between gap-10">
-                    <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.28em] text-[#a67c52]">
-                      <span>{card.label}</span>
-                      <span className="font-display text-2xl tracking-normal text-[#cbb99f]">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                    </div>
-                    <div>
-                      <h3 className="font-display text-3xl leading-tight text-[#241a12] md:text-[2.1rem]">
-                        {card.heading}
-                      </h3>
-                      <p className="mt-5 text-[15px] leading-[1.85] text-[#655846]">
-                        {card.content}
-                      </p>
-                    </div>
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.42),transparent_60%)]" />
+                <div className="relative">
+                  <div className="mb-4 flex items-center justify-between gap-4 text-[11px] font-medium uppercase tracking-[0.32em] text-[#a67c52]">
+                    <span>{card.label}</span>
+                    <span className="font-display text-lg tracking-normal text-[#8b6c47]">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
                   </div>
-                </motion.article>
-              </Reveal>
-            ))}
-          </div>
+                  <h3 className="font-display text-3xl leading-tight text-[#241a12] md:text-[2.35rem]">
+                    {card.heading}
+                  </h3>
+                  <p className="mt-5 max-w-3xl text-base leading-[1.9] text-[#6a5b49] md:text-lg">
+                    {card.content}
+                  </p>
+                </div>
+              </motion.article>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
