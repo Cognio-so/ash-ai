@@ -802,13 +802,13 @@ function AboutMe() {
   ];
 
   return (
-    <section id="about" className="relative px-5 py-20 md:px-6 md:py-32">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.48fr_0.52fr] lg:gap-16">
+    <section id="about" className="relative scroll-mt-28 px-5 py-28 md:px-6 md:py-36 lg:py-40">
+      <div className="mx-auto grid max-w-7xl items-start gap-12 lg:grid-cols-[0.46fr_0.54fr] lg:gap-18">
         <Reveal>
           <motion.div
             whileHover={{ y: -6 }}
             transition={{ type: "spring", stiffness: 180, damping: 20 }}
-            className="about-artwork relative mx-auto aspect-[4/5] w-full max-w-[620px] overflow-hidden"
+            className="about-artwork relative mx-auto h-[clamp(560px,78vh,860px)] w-full max-w-[610px] overflow-hidden"
           >
             <img
               src={aryanAboutPortrait}
@@ -819,14 +819,14 @@ function AboutMe() {
           </motion.div>
         </Reveal>
         <Reveal delay={0.12}>
-          <div className="max-w-3xl">
-            <h2 className="font-display pb-2 text-5xl leading-[1.16] text-[#2e2a27] md:text-7xl md:leading-[1.12]">
+          <div className="max-w-3xl pt-2 lg:pt-4">
+            <h2 className="font-display pb-3 text-[clamp(3.2rem,6.4vw,6.4rem)] leading-[1.08] text-[#2e2a27]">
               Building AI that feels human.
             </h2>
-            <p className="mt-7 text-xl leading-relaxed text-[#8d857b] md:text-2xl">
+            <p className="mt-6 text-xl leading-[1.65] text-[#8d857b] md:text-2xl">
               I believe technology should simplify life, not complicate it.
             </p>
-            <div className="mt-8 space-y-4 text-[18px] leading-[1.9] text-[#4f463d]">
+            <div className="mt-8 space-y-4 text-[17px] leading-[1.85] text-[#4f463d] md:text-[18px]">
               {paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
@@ -1226,3 +1226,4 @@ export function Footer() {
     </footer>
   );
 }
+
