@@ -335,7 +335,6 @@ function SocialImpactPage() {
                     className="lens-image w-full h-full object-cover"
                   />
                 </Lens>
-                <div className="lens-glare" />
               </div>
             </div>
 
@@ -378,3 +377,4 @@ function SocialImpactPage() {
     </main>
   );
 }
+

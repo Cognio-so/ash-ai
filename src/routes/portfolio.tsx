@@ -216,7 +216,6 @@ function PortfolioPage() {
                       className="lens-image w-full h-full"
                     />
                   </Lens>
-                  <div className="lens-glare" />
                   <div className="absolute bottom-6 left-6 z-10 bg-slate-950/80 backdrop-blur-md px-4 py-2 border border-white/10 rounded-xl text-xs uppercase tracking-[0.2em] text-violet-300">
                     {project.tag}
                   </div>
@@ -301,3 +300,4 @@ function PortfolioPage() {
     </main>
   );
 }
+

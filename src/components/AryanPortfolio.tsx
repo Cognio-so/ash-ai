@@ -23,9 +23,9 @@ import {
   ArrowUp,
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import BlurText from "./BlurText";
 import CircularGallery from "./CircularGallery";
 import Lens from "./Lens";
+import SplitText from "./SplitText";
 import TeamMemberPage, { teamMembers } from "./TeamMemberPage";
 import aryanPortrait from "@/assets/aryan-portrait.png";
 import aryanAboutPortrait from "@/assets/aryan-about-portrait.png";
@@ -254,6 +254,10 @@ export function Navbar() {
 }
 /* ---------------- Hero ---------------- */
 function Hero() {
+  const handleAnimationComplete = () => {
+    console.log("All letters have animated!");
+  };
+
   return (
     <section
       id="home"
@@ -309,8 +313,6 @@ function Hero() {
                 className="hero-lens-image h-full w-full object-cover object-top"
               />
             </Lens>
-            <div className="hero-lens-glare" />
-            <div className="hero-lens-ring" />
           </div>
         </motion.div>
       </div>
@@ -1238,3 +1240,4 @@ export function Footer() {
     </footer>
   );
 }
+
