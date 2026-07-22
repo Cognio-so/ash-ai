@@ -17,7 +17,6 @@ import {
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Navbar, Footer, CursorSpotlight, ScrollProgress } from "@/components/AryanPortfolio";
-import Lens from "@/components/Lens";
 
 export const Route = createFileRoute("/social-impact")({
   head: () => ({
@@ -323,18 +322,16 @@ function SocialImpactPage() {
                 </div>
               </div>
 
-              {/* Banner Image with Lens Zoom */}
-              <div className="lens-zoom-container aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/10">
-                <Lens zoomFactor={2} lensSize={150} ariaLabel={`Zoom ${activeSection.label} image`}>
-                  <img
-                    src={activeSection.heroUrl}
-                    alt={activeSection.label}
-                    loading="eager"
-                    fetchPriority="high"
-                    decoding="async"
-                    className="lens-image w-full h-full object-cover"
-                  />
-                </Lens>
+              {/* Banner Image */}
+              <div className="image-frame aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/10">
+                <img
+                  src={activeSection.heroUrl}
+                  alt={activeSection.label}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  className="image-frame-img w-full h-full object-cover"
+                />
               </div>
             </div>
 
@@ -377,4 +374,3 @@ function SocialImpactPage() {
     </main>
   );
 }
-

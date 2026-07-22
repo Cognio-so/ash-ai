@@ -146,68 +146,14 @@
   background-size: 56px 56px;
 }
 
-/* ---------------- Lens Magnifier ---------------- */
-.lens-root {
-  cursor: crosshair;
-  isolation: isolate;
-}
-
-.lens-root img {
-  display: block;
-}
-
-
-.lens-magnifier {
-  position: absolute;
-  left: var(--lens-x);
-  top: var(--lens-y);
-  z-index: 8;
-  width: var(--lens-size);
-  height: var(--lens-size);
-  overflow: hidden;
-  border: 1px solid rgba(255, 248, 237, 0.74);
-  border-radius: 999px;
-  opacity: 0;
-  pointer-events: none;
-  transform: translate(-50%, -50%) scale(0.78);
-  transition:
-    opacity 0.22s ease,
-    transform 0.22s ease;
-  box-shadow:
-    0 20px 45px rgba(67, 45, 24, 0.18),
-    inset 0 0 0 1px rgba(46, 42, 39, 0.12),
-    inset 0 0 26px rgba(255, 255, 255, 0.22);
-}
-
-.lens-magnifier.is-active {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.lens-magnified {
-  width: 100%;
-  height: 100%;
-  transform: translate(
-      calc((50% - var(--lens-x)) * var(--lens-zoom)),
-      calc((50% - var(--lens-y)) * var(--lens-zoom))
-    )
-    scale(var(--lens-zoom));
-  transform-origin: center;
-}
-
-.lens-magnified img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-/* ---------------- Image Lens Frame ---------------- */
-.lens-zoom-container {
+/* ---------------- Image Frame ---------------- */
+.image-frame {
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-xl);
 }
 
-.lens-image {
+.image-frame-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -590,11 +536,11 @@
   transform: translateX(145%);
 }
 
-.hero-lens-frame {
+.hero-image-frame {
   isolation: isolate;
 }
 
-.hero-lens-image {
+.hero-image-frame-img {
   filter: saturate(0.98) contrast(1.02);
 }
 
@@ -606,7 +552,7 @@
 
   .nav-animated-link,
   .nav-call-button,
-  .hero-lens-frame {
+  .hero-image-frame {
     transition: none !important;
   }
 }
@@ -658,7 +604,7 @@
 
   .portrait-paper-frame img,
   .about-artwork img,
-  .lens-image {
+  .image-frame-img {
     filter: none !important;
     image-rendering: auto;
     transform: translateZ(0);
@@ -677,7 +623,7 @@
     display: none;
   }
 
-  .lens-zoom-container {
+  .image-frame {
     border-radius: 18px !important;
     box-shadow: 0 14px 34px rgba(67, 45, 24, 0.1) !important;
   }
@@ -687,4 +633,3 @@
     border-radius: 18px !important;
   }
 }
-

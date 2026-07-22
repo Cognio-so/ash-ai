@@ -24,7 +24,6 @@ import {
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import CircularGallery from "./CircularGallery";
-import Lens from "./Lens";
 import SplitText from "./SplitText";
 import TeamMemberPage, { teamMembers } from "./TeamMemberPage";
 import aryanPortrait from "@/assets/aryan-portrait.png";
@@ -303,16 +302,14 @@ function Hero() {
           transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto w-full max-w-[330px] sm:max-w-[420px] md:max-w-[460px]"
         >
-          <div className="portrait-paper-frame hero-lens-frame relative overflow-hidden">
-            <Lens zoomFactor={2.25} lensSize={156} ariaLabel="Zoom Aryan portrait">
-              <img
-                src={aryanPortrait}
-                alt="Aryan portrait"
-                fetchPriority="high"
-                decoding="async"
-                className="hero-lens-image h-full w-full object-cover object-top"
-              />
-            </Lens>
+          <div className="portrait-paper-frame hero-image-frame relative overflow-hidden">
+            <img
+              src={aryanPortrait}
+              alt="Aryan portrait"
+              fetchPriority="high"
+              decoding="async"
+              className="hero-image-frame-img h-full w-full object-cover object-top"
+            />
           </div>
         </motion.div>
       </div>
@@ -1240,4 +1237,3 @@ export function Footer() {
     </footer>
   );
 }
-

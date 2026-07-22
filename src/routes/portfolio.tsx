@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight, Check, ArrowUpRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Navbar, Footer, CursorSpotlight, ScrollProgress } from "@/components/AryanPortfolio";
-import Lens from "@/components/Lens";
 
 type Project = {
   tag: string;
@@ -200,22 +199,20 @@ function PortfolioPage() {
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                 className="grid lg:grid-cols-2 gap-12 items-center"
               >
-                {/* Image Showcase with Lens Zoom */}
+                {/* Image Showcase */}
                 <div
-                  className={`lens-zoom-container aspect-[16/10] bg-slate-900 border border-white/10 shadow-2xl relative ${
+                  className={`image-frame aspect-[16/10] bg-slate-900 border border-white/10 shadow-2xl relative ${
                     idx % 2 === 1 ? "lg:order-last" : ""
                   }`}
                 >
-                  <Lens zoomFactor={2} lensSize={150} ariaLabel={`Zoom ${project.title} image`}>
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      loading={idx === 0 ? "eager" : "lazy"}
-                      fetchPriority={idx === 0 ? "high" : "auto"}
-                      decoding="async"
-                      className="lens-image w-full h-full"
-                    />
-                  </Lens>
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    loading={idx === 0 ? "eager" : "lazy"}
+                    fetchPriority={idx === 0 ? "high" : "auto"}
+                    decoding="async"
+                    className="image-frame-img w-full h-full"
+                  />
                   <div className="absolute bottom-6 left-6 z-10 bg-slate-950/80 backdrop-blur-md px-4 py-2 border border-white/10 rounded-xl text-xs uppercase tracking-[0.2em] text-violet-300">
                     {project.tag}
                   </div>
@@ -300,4 +297,3 @@ function PortfolioPage() {
     </main>
   );
 }
-
