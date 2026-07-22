@@ -44,7 +44,7 @@ const portfolioItems: Project[] = [
     ],
     stack: ["LangGraph", "pgvector", "Cohere Rerank", "vLLM", "Kubernetes", "OpenTelemetry"],
     image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=92",
+      "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1800&q=92",
   },
   {
     tag: "Multi-Agent System",
@@ -69,7 +69,7 @@ const portfolioItems: Project[] = [
     ],
     stack: ["LangGraph", "Temporal", "Postgres", "Neo4j", "Datadog", "OpenAI / Anthropic"],
     image:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=92",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1800&q=92",
   },
   {
     tag: "Automation",
@@ -94,7 +94,7 @@ const portfolioItems: Project[] = [
     ],
     stack: ["Donut", "GPT-4o Vision", "Pydantic", "Redis", "FastAPI", "n8n"],
     image:
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1600&q=92",
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1800&q=92",
   },
   {
     tag: "AI Product",
@@ -119,7 +119,7 @@ const portfolioItems: Project[] = [
     ],
     stack: ["Next.js", "Pinecone", "Anthropic Claude", "Stripe", "Segment", "Shopify"],
     image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=92",
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1800&q=92",
   },
 ];
 
@@ -302,3 +302,4 @@ function PortfolioPage() {
     </main>
   );
 }
+
