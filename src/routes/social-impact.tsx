@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Navbar, Footer, CursorSpotlight, ScrollProgress } from "@/components/AryanPortfolio";
+import Lens from "@/components/Lens";
 
 export const Route = createFileRoute("/social-impact")({
   head: () => ({
@@ -79,8 +80,7 @@ const impactSections: PageData[] = [
     tagline: "Because the best investment is in a mind that didn't have the chance.",
     quote:
       "We build free, structured learning paths for emerging AI engineers — from curious beginners to confident builders. Every course, every mentorship session, every certificate is offered at zero cost to those who need it most.",
-    heroUrl:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=2400&q=92",
+    heroUrl: "/document-intelligence-pipeline.png",
     topics: [
       {
         num: "01",
@@ -134,8 +134,7 @@ const impactSections: PageData[] = [
     tagline: "Deep thinking, long-form writing — no clickbait, no fluff, no paywalls.",
     quote:
       "Every post is a deliberate act of knowledge-sharing. We write to break down complexity, challenge assumptions, and give practitioners and policy-makers a shared language for what's coming next.",
-    heroUrl:
-      "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=2400&q=92",
+    heroUrl: "/ashu-logo.png",
     topics: [
       {
         num: "01",
@@ -189,8 +188,7 @@ const impactSections: PageData[] = [
     tagline: "The best tools are built by the people who need them most.",
     quote:
       "We fund, host, and maintain open infrastructure for independent AI builders — because great work shouldn't require a corporate backing. From shared GPU clusters to collaborative datasets, everything here is community-owned and community-led.",
-    heroUrl:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=2400&q=92",
+    heroUrl: "/autonomous-operations-platform.png",
     topics: [
       {
         num: "01",
@@ -327,14 +325,16 @@ function SocialImpactPage() {
 
               {/* Banner Image with Lens Zoom */}
               <div className="lens-zoom-container aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/10">
-                <img
-                  src={activeSection.heroUrl}
-                  alt={activeSection.label}
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
-                  className="lens-image w-full h-full object-cover"
-                />
+                <Lens zoomFactor={2} lensSize={150} ariaLabel={`Zoom ${activeSection.label} image`}>
+                  <img
+                    src={activeSection.heroUrl}
+                    alt={activeSection.label}
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                    className="lens-image w-full h-full object-cover"
+                  />
+                </Lens>
                 <div className="lens-glare" />
               </div>
             </div>

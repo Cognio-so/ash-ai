@@ -25,6 +25,7 @@ import {
 import { Link } from "@tanstack/react-router";
 import BlurText from "./BlurText";
 import CircularGallery from "./CircularGallery";
+import Lens from "./Lens";
 import TeamMemberPage, { teamMembers } from "./TeamMemberPage";
 import aryanPortrait from "@/assets/aryan-portrait.png";
 import aryanAboutPortrait from "@/assets/aryan-about-portrait.png";
@@ -299,13 +300,15 @@ function Hero() {
           className="relative mx-auto w-full max-w-[330px] sm:max-w-[420px] md:max-w-[460px]"
         >
           <div className="portrait-paper-frame hero-lens-frame relative overflow-hidden">
-            <img
-              src={aryanPortrait}
-              alt="Aryan portrait"
-              fetchPriority="high"
-              decoding="async"
-              className="hero-lens-image h-full w-full object-cover object-top"
-            />
+            <Lens zoomFactor={2.25} lensSize={156} ariaLabel="Zoom Aryan portrait">
+              <img
+                src={aryanPortrait}
+                alt="Aryan portrait"
+                fetchPriority="high"
+                decoding="async"
+                className="hero-lens-image h-full w-full object-cover object-top"
+              />
+            </Lens>
             <div className="hero-lens-glare" />
             <div className="hero-lens-ring" />
           </div>
@@ -411,34 +414,28 @@ const portfolioItems: Project[] = [
 
 const galleryItems = [
   {
-    image:
-      "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=1600&q=92",
-    text: "Automation Lab",
+    image: aryanPortrait,
+    text: "Aryan",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1600&q=92",
-    text: "Agent Systems",
+    image: aryanAboutPortrait,
+    text: "Builder",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=92",
-    text: "AI Products",
+    image: inspirationIllustration,
+    text: "Philosophy",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1600&q=92",
-    text: "Founder Strategy",
+    image: "/document-intelligence-pipeline.png",
+    text: "Documents",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=1600&q=92",
-    text: "AI Operator",
+    image: "/autonomous-operations-platform.png",
+    text: "Operations",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1600&q=92",
-    text: "Product Lead",
+    image: "/ashu-logo.png",
+    text: "Ashu AI",
   },
 ];
 
@@ -1241,5 +1238,3 @@ export function Footer() {
     </footer>
   );
 }
-
-

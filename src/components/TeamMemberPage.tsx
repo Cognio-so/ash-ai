@@ -25,8 +25,7 @@ export const teamMembers: TeamMember[] = [
     tagline: "Automating the impossible, one workflow at a time.",
     bio: "Alex leads our automation division, building intelligent workflows that eliminate repetitive work across enterprise systems. With 6+ years in RPA and AI pipelines, he has scaled operations for 20+ clients globally, saving thousands of hours monthly.",
     skills: ["RPA", "n8n", "Make.com", "Python", "LLM Pipelines", "Zapier"],
-    image:
-      "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=1600&q=92",
+    image: "/document-intelligence-pipeline.png",
     social: [
       { platform: "LinkedIn", url: "#" },
       { platform: "GitHub", url: "#" },
@@ -40,8 +39,7 @@ export const teamMembers: TeamMember[] = [
     tagline: "Teaching machines to think, act, and decide.",
     bio: "Omar architects multi-agent AI systems from orchestration layers to tool-use pipelines. His agent infrastructure runs at scale for thousands of daily users. He obsesses over reliability, speed, and making AI actually useful in the real world.",
     skills: ["LangChain", "AutoGen", "Claude API", "FastAPI", "RAG", "Vector DBs"],
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1600&q=92",
+    image: "/autonomous-operations-platform.png",
     social: [
       { platform: "LinkedIn", url: "#" },
       { platform: "GitHub", url: "#" },
@@ -56,8 +54,7 @@ export const teamMembers: TeamMember[] = [
     tagline: "Great AI products feel invisible — until they change everything.",
     bio: "Elena bridges design and AI intelligence, crafting experiences that make complex systems feel effortless. She has shipped 12+ AI-native products and specializes in human-AI interaction, zero-friction onboarding, and product intuition.",
     skills: ["Figma", "UX Research", "AI Prototyping", "Next.js", "Framer"],
-    image:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=92",
+    image: "/ashu-logo.png",
     social: [
       { platform: "LinkedIn", url: "#" },
       { platform: "Twitter", url: "#" },
@@ -71,8 +68,7 @@ export const teamMembers: TeamMember[] = [
     tagline: "Strategy is just storytelling with numbers behind it.",
     bio: "Sophia works directly with founders on AI strategy, go-to-market positioning, and investor narratives. Former consultant turned AI builder, she has advised 30+ startups across 3 continents and helped raise $40M+ in funding.",
     skills: ["GTM Strategy", "Fundraising", "AI Roadmaps", "Pitch Decks", "OKRs"],
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1600&q=92",
+    image: "/document-intelligence-pipeline.png",
     social: [
       { platform: "LinkedIn", url: "#" },
       { platform: "Twitter", url: "#" },
@@ -86,8 +82,7 @@ export const teamMembers: TeamMember[] = [
     tagline: "Ops is the silent engine that makes AI actually work.",
     bio: "Marco ensures every AI system we ship runs flawlessly in production — monitoring, scaling, and optimizing 24/7. He brings military-grade operational discipline to AI deployment, incident response, and infrastructure resilience.",
     skills: ["DevOps", "Docker", "Supabase", "CI/CD", "Monitoring", "Cloud Infra"],
-    image:
-      "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=1600&q=92",
+    image: "/autonomous-operations-platform.png",
     social: [
       { platform: "LinkedIn", url: "#" },
       { platform: "GitHub", url: "#" },
@@ -101,8 +96,7 @@ export const teamMembers: TeamMember[] = [
     tagline: "The best products are built at the intersection of empathy and data.",
     bio: "Priya owns the product roadmap end-to-end — from user research and prioritization to sprint planning and launch. With a background in behavioral design and AI systems, she ensures every feature we ship solves a real problem for real people.",
     skills: ["Product Strategy", "Roadmapping", "User Research", "Agile", "Analytics"],
-    image:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1600&q=92",
+    image: "/ashu-logo.png",
     social: [
       { platform: "LinkedIn", url: "#" },
       { platform: "Twitter", url: "#" },

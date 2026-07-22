@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight, Check, ArrowUpRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Navbar, Footer, CursorSpotlight, ScrollProgress } from "@/components/AryanPortfolio";
+import Lens from "@/components/Lens";
 
 type Project = {
   tag: string;
@@ -43,8 +44,7 @@ const portfolioItems: Project[] = [
       { label: "ROI in year 1", value: "11×" },
     ],
     stack: ["LangGraph", "pgvector", "Cohere Rerank", "vLLM", "Kubernetes", "OpenTelemetry"],
-    image:
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1800&q=92",
+    image: "/document-intelligence-pipeline.png",
   },
   {
     tag: "Multi-Agent System",
@@ -116,8 +116,7 @@ const portfolioItems: Project[] = [
       { label: "Return rate", value: "−18%" },
     ],
     stack: ["Next.js", "Pinecone", "Anthropic Claude", "Stripe", "Segment", "Shopify"],
-    image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1800&q=92",
+    image: "/ashu-logo.png",
   },
 ];
 
@@ -207,14 +206,16 @@ function PortfolioPage() {
                     idx % 2 === 1 ? "lg:order-last" : ""
                   }`}
                 >
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    loading={idx === 0 ? "eager" : "lazy"}
-                    fetchPriority={idx === 0 ? "high" : "auto"}
-                    decoding="async"
-                    className="lens-image w-full h-full"
-                  />
+                  <Lens zoomFactor={2} lensSize={150} ariaLabel={`Zoom ${project.title} image`}>
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      loading={idx === 0 ? "eager" : "lazy"}
+                      fetchPriority={idx === 0 ? "high" : "auto"}
+                      decoding="async"
+                      className="lens-image w-full h-full"
+                    />
+                  </Lens>
                   <div className="lens-glare" />
                   <div className="absolute bottom-6 left-6 z-10 bg-slate-950/80 backdrop-blur-md px-4 py-2 border border-white/10 rounded-xl text-xs uppercase tracking-[0.2em] text-violet-300">
                     {project.tag}
@@ -300,4 +301,3 @@ function PortfolioPage() {
     </main>
   );
 }
-
