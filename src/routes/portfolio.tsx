@@ -68,8 +68,7 @@ const portfolioItems: Project[] = [
       { label: "CSAT change", value: "+14 pts" },
     ],
     stack: ["LangGraph", "Temporal", "Postgres", "Neo4j", "Datadog", "OpenAI / Anthropic"],
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1800&q=92",
+    image: "/autonomous-operations-platform.png",
   },
   {
     tag: "Automation",
