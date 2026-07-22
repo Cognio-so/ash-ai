@@ -304,8 +304,10 @@ function Hero() {
               alt="Aryan portrait"
               fetchPriority="high"
               decoding="async"
-              className="h-full w-full object-cover object-top"
+              className="hero-lens-image h-full w-full object-cover object-top"
             />
+            <div className="hero-lens-glare" />
+            <div className="hero-lens-ring" />
           </div>
         </motion.div>
       </div>
