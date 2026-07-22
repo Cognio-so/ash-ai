@@ -24,8 +24,8 @@ import {
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import CircularGallery from "./CircularGallery";
-import SplitText from "./SplitText";
 import TeamMemberPage, { teamMembers } from "./TeamMemberPage";
+import TextType from "./TextType";
 import aryanPortrait from "@/assets/aryan-portrait.png";
 import aryanAboutPortrait from "@/assets/aryan-about-portrait.png";
 import inspirationIllustration from "@/assets/inspiration-philosophy-illustration.png";
@@ -253,10 +253,6 @@ export function Navbar() {
 }
 /* ---------------- Hero ---------------- */
 function Hero() {
-  const handleAnimationComplete = () => {
-    console.log("All letters have animated!");
-  };
-
   return (
     <section
       id="home"
