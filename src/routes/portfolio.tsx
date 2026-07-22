@@ -93,8 +93,7 @@ const portfolioItems: Project[] = [
       { label: "Cost / document", value: "−68%" },
     ],
     stack: ["Donut", "GPT-4o Vision", "Pydantic", "Redis", "FastAPI", "n8n"],
-    image:
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1800&q=92",
+    image: "/document-intelligence-pipeline.png",
   },
   {
     tag: "AI Product",
