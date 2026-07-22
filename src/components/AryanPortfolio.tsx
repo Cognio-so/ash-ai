@@ -235,7 +235,7 @@ export function Navbar() {
               to={link.to}
               activeProps={{ className: "text-[#241a12]" }}
               inactiveProps={{ className: "text-[#75654f] hover:text-[#241a12]" }}
-              className="text-[11px] font-semibold uppercase tracking-[0.24em] transition-colors"
+              className="nav-animated-link text-[11px] font-semibold uppercase tracking-[0.24em] transition-colors"
             >
               {link.label}
             </Link>
@@ -243,7 +243,7 @@ export function Navbar() {
         </div>
         <Link
           to="/contact"
-          className="inline-flex items-center justify-center border border-[#2b2117]/20 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#2b2117] transition hover:border-[#2b2117] hover:bg-[#2b2117] hover:text-[#f8f0e4]"
+          className="nav-call-button inline-flex items-center justify-center border border-[#2b2117]/20 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#2b2117] transition hover:border-[#2b2117] hover:bg-[#2b2117] hover:text-[#f8f0e4]"
         >
           Book a Call
         </Link>
@@ -298,7 +298,7 @@ function Hero() {
           transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto w-full max-w-[330px] sm:max-w-[420px] md:max-w-[460px]"
         >
-          <div className="portrait-paper-frame relative overflow-hidden">
+          <div className="portrait-paper-frame hero-lens-frame relative overflow-hidden">
             <img
               src={aryanPortrait}
               alt="Aryan portrait"
