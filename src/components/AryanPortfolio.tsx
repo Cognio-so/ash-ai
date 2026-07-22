@@ -659,18 +659,21 @@ const pressLogos = [
   "YourStory",
   "Inc42",
 ];
+
+type MarqueeItem = string | { name: string; iconUrl?: string };
+
 const clientLogos = [
-  "Stripe",
-  "Notion",
-  "Linear",
-  "Vercel",
-  "Anthropic",
-  "OpenAI",
-  "Figma",
-  "Loom",
+  { name: "Stripe", iconUrl: "https://cdn.simpleicons.org/stripe/2e2a27" },
+  { name: "Notion", iconUrl: "https://cdn.simpleicons.org/notion/2e2a27" },
+  { name: "Linear", iconUrl: "https://cdn.simpleicons.org/linear/2e2a27" },
+  { name: "Vercel", iconUrl: "https://cdn.simpleicons.org/vercel/2e2a27" },
+  { name: "Anthropic", iconUrl: "https://cdn.simpleicons.org/anthropic/2e2a27" },
+  { name: "OpenAI", iconUrl: "https://cdn.simpleicons.org/openai/2e2a27" },
+  { name: "Figma", iconUrl: "https://cdn.simpleicons.org/figma/2e2a27" },
+  { name: "Loom", iconUrl: "https://cdn.simpleicons.org/loom/2e2a27" },
 ];
 
-function Marquee({ items, reverse = false }: { items: string[]; reverse?: boolean }) {
+function Marquee({ items, reverse = false }: { items: MarqueeItem[]; reverse?: boolean }) {
   return (
     <div className="group relative overflow-hidden border-y border-[#2b2117]/8 bg-[#fff8ed]/42 py-7">
       <div className="absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-[#f8f4ec] to-transparent" />
@@ -681,8 +684,18 @@ function Marquee({ items, reverse = false }: { items: string[]; reverse?: boolea
       >
         {[...items, ...items].map((logo, i) => (
           <div key={i} className="flex items-center gap-10 md:gap-14">
-            <div className="font-display whitespace-nowrap text-2xl text-[#2e2a27] transition duration-300 md:text-3xl">
-              {logo}
+            <div className="flex items-center gap-3 whitespace-nowrap text-[#2e2a27] transition duration-300">
+              {typeof logo !== "string" && logo.iconUrl && (
+                <img
+                  src={logo.iconUrl}
+                  alt=""
+                  loading="lazy"
+                  className="h-7 w-7 object-contain opacity-90 md:h-8 md:w-8"
+                />
+              )}
+              <span className="font-display text-2xl md:text-3xl">
+                {typeof logo === "string" ? logo : logo.name}
+              </span>
             </div>
             <span
               aria-hidden="true"
@@ -1226,4 +1239,5 @@ export function Footer() {
     </footer>
   );
 }
+
 
