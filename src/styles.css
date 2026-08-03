@@ -653,3 +653,53 @@
   animation-iteration-count: infinite;
   animation-timing-function: steps(1, end);
 }
+
+.true-focus {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7em;
+  align-items: center;
+}
+
+.true-focus-word {
+  position: relative;
+  display: inline-flex;
+  padding: 0.18em 0.32em;
+  filter: blur(var(--true-focus-blur));
+  opacity: 0.48;
+  transition:
+    filter var(--true-focus-duration) ease,
+    opacity var(--true-focus-duration) ease,
+    transform var(--true-focus-duration) ease;
+}
+
+.true-focus-word::before {
+  content: "";
+  position: absolute;
+  inset: -0.26em;
+  border: 1px solid var(--true-focus-border);
+  opacity: 0;
+  transform: scale(0.84);
+  transition:
+    opacity var(--true-focus-duration) ease,
+    transform var(--true-focus-duration) ease;
+  pointer-events: none;
+}
+
+.true-focus-word.is-active {
+  filter: blur(0);
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.true-focus-word.is-active::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .true-focus-word,
+  .true-focus-word::before {
+    transition: none !important;
+  }
+}

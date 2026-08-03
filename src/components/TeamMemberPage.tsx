@@ -19,88 +19,89 @@ export type TeamMember = {
 export const teamMembers: TeamMember[] = [
   {
     id: "automation-lab",
-    name: "Alex Rivera",
-    role: "Automation Lab Lead",
-    label: "Team Member — Automation Lab",
-    tagline: "Automating the impossible, one workflow at a time.",
-    bio: "Alex leads our automation division, building intelligent workflows that eliminate repetitive work across enterprise systems. With 6+ years in RPA and AI pipelines, he has scaled operations for 20+ clients globally, saving thousands of hours monthly.",
-    skills: ["RPA", "n8n", "Make.com", "Python", "LLM Pipelines", "Zapier"],
-    image: "/document-intelligence-pipeline.png",
-    social: [
-      { platform: "LinkedIn", url: "#" },
-      { platform: "GitHub", url: "#" },
-    ],
+    name: "Automation Lab",
+    role: "Workflow Automation Studio",
+    label: "Gallery Detail — Automation Lab",
+    tagline: "Reliable automation for teams that are tired of repetitive work.",
+    bio: "Automation Lab is where manual operations become smooth, monitored workflows. This page covers the systems we build for lead routing, CRM updates, invoice processing, internal alerts, reporting, onboarding, and approval flows. Every automation is documented, tested with realistic edge cases, and designed with fallback paths so production teams can trust it.",
+    skills: ["n8n", "Make", "Zapier", "CRM flows", "Webhooks", "Error handling"],
+    image:
+      "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=1600&q=92",
+    social: [],
   },
   {
     id: "agent-systems",
-    name: "Omar Hassan",
-    role: "Agent Systems Engineer",
-    label: "Team Member — Agent Systems",
-    tagline: "Teaching machines to think, act, and decide.",
-    bio: "Omar architects multi-agent AI systems from orchestration layers to tool-use pipelines. His agent infrastructure runs at scale for thousands of daily users. He obsesses over reliability, speed, and making AI actually useful in the real world.",
-    skills: ["LangChain", "AutoGen", "Claude API", "FastAPI", "RAG", "Vector DBs"],
-    image: "/autonomous-operations-platform.png",
-    social: [
-      { platform: "LinkedIn", url: "#" },
-      { platform: "GitHub", url: "#" },
-      { platform: "Twitter", url: "#" },
-    ],
+    name: "Agent Systems",
+    role: "AI Agent Architecture",
+    label: "Gallery Detail — Agent Systems",
+    tagline: "AI agents that can reason, use tools, and stay inside guardrails.",
+    bio: "Agent Systems focuses on production-grade assistants and multi-step AI workers. The build includes prompt design, tool permissions, memory, retrieval, task routing, human approval gates, logs, and evaluation checks. The goal is not a flashy demo; it is an agent workflow that can be safely used by real customers or internal teams.",
+    skills: ["RAG", "Tool use", "LangGraph", "Guardrails", "Evaluations", "Audit logs"],
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1600&q=92",
+    social: [],
   },
   {
     id: "ai-products",
-    name: "Elena Vasquez",
-    role: "AI Products Designer",
-    label: "Team Member — AI Products",
-    tagline: "Great AI products feel invisible — until they change everything.",
-    bio: "Elena bridges design and AI intelligence, crafting experiences that make complex systems feel effortless. She has shipped 12+ AI-native products and specializes in human-AI interaction, zero-friction onboarding, and product intuition.",
-    skills: ["Figma", "UX Research", "AI Prototyping", "Next.js", "Framer"],
-    image: "/ashu-logo.png",
-    social: [
-      { platform: "LinkedIn", url: "#" },
-      { platform: "Twitter", url: "#" },
-    ],
+    name: "AI Products",
+    role: "AI Product Design & Build",
+    label: "Gallery Detail — AI Products",
+    tagline: "Beautiful AI experiences that feel useful from the first click.",
+    bio: "AI Products is for founders and teams who want more than a chatbot. We shape the user journey, data flow, model behavior, interface states, onboarding, and success metrics into one coherent product. The result is a clean, usable experience that explains itself through design and delivers real business value.",
+    skills: ["UX strategy", "AI UX", "SaaS UI", "Prototyping", "Model flows", "Launch polish"],
+    image:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=92",
+    social: [],
   },
   {
     id: "founder-strategy",
-    name: "Sophia Chen",
-    role: "Founder Strategy Lead",
-    label: "Team Member — Founder Strategy",
-    tagline: "Strategy is just storytelling with numbers behind it.",
-    bio: "Sophia works directly with founders on AI strategy, go-to-market positioning, and investor narratives. Former consultant turned AI builder, she has advised 30+ startups across 3 continents and helped raise $40M+ in funding.",
-    skills: ["GTM Strategy", "Fundraising", "AI Roadmaps", "Pitch Decks", "OKRs"],
-    image: "/document-intelligence-pipeline.png",
-    social: [
-      { platform: "LinkedIn", url: "#" },
-      { platform: "Twitter", url: "#" },
+    name: "Founder Strategy",
+    role: "AI Roadmaps for Founders",
+    label: "Gallery Detail — Founder Strategy",
+    tagline: "Clear product direction before a single sprint gets wasted.",
+    bio: "Founder Strategy helps convert an idea into a practical AI roadmap. We define the offer, user segments, must-have workflows, data requirements, technical risks, launch scope, and the fastest path to a credible MVP. This is built for founders who want sharp thinking, honest feasibility, and execution-ready plans.",
+    skills: [
+      "MVP planning",
+      "AI roadmap",
+      "Offer design",
+      "GTM clarity",
+      "Scope control",
+      "Tech strategy",
     ],
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1600&q=92",
+    social: [],
   },
   {
     id: "ai-operator",
-    name: "Marco Delgado",
+    name: "AI Operator",
     role: "AI Operator",
-    label: "Team Member — AI Operator",
-    tagline: "Ops is the silent engine that makes AI actually work.",
-    bio: "Marco ensures every AI system we ship runs flawlessly in production — monitoring, scaling, and optimizing 24/7. He brings military-grade operational discipline to AI deployment, incident response, and infrastructure resilience.",
-    skills: ["DevOps", "Docker", "Supabase", "CI/CD", "Monitoring", "Cloud Infra"],
-    image: "/autonomous-operations-platform.png",
-    social: [
-      { platform: "LinkedIn", url: "#" },
-      { platform: "GitHub", url: "#" },
+    label: "Gallery Detail — AI Operator",
+    tagline: "The operational layer that keeps AI systems useful after launch.",
+    bio: "AI Operator covers the behind-the-scenes work needed to keep AI products dependable: monitoring, cost control, error review, prompt/version tracking, knowledge base updates, incident response, and continuous improvement. It is ideal for teams that already have an AI system but need it to run with discipline.",
+    skills: [
+      "Monitoring",
+      "Cost control",
+      "Prompt ops",
+      "Incident review",
+      "CI/CD",
+      "System tuning",
     ],
+    image:
+      "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=1600&q=92",
+    social: [],
   },
   {
     id: "product-lead",
-    name: "Priya Nair",
+    name: "Product Lead",
     role: "Product Lead",
-    label: "Team Member — Product Lead",
-    tagline: "The best products are built at the intersection of empathy and data.",
-    bio: "Priya owns the product roadmap end-to-end — from user research and prioritization to sprint planning and launch. With a background in behavioral design and AI systems, she ensures every feature we ship solves a real problem for real people.",
-    skills: ["Product Strategy", "Roadmapping", "User Research", "Agile", "Analytics"],
-    image: "/ashu-logo.png",
-    social: [
-      { platform: "LinkedIn", url: "#" },
-      { platform: "Twitter", url: "#" },
-    ],
+    label: "Gallery Detail — Product Lead",
+    tagline: "A calm product system for turning messy ideas into shipped features.",
+    bio: "Product Lead is the planning and delivery layer for digital products. We organize priorities, user stories, feature states, acceptance criteria, launch steps, and feedback loops so builders can move fast without losing quality. The page is designed for teams that need product clarity and clean execution.",
+    skills: ["Roadmaps", "User stories", "Sprint planning", "Analytics", "Launch plans", "QA flow"],
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1600&q=92",
+    social: [],
   },
 ];
 
@@ -470,79 +471,95 @@ export default function TeamMemberPage({
                 </div>
               </div>
 
-              {/* Divider */}
-              <div
-                style={{
-                  width: "100%",
-                  height: 1,
-                  background: "rgba(255,255,255,0.1)",
-                  marginBottom: 24,
-                }}
-              />
+              {member.social.length ? (
+                <>
+                  <div
+                    style={{
+                      width: "100%",
+                      height: 1,
+                      background: "rgba(255,255,255,0.1)",
+                      marginBottom: 24,
+                    }}
+                  />
 
-              {/* Social links */}
-              <div>
+                  <div>
+                    <div
+                      style={{
+                        fontSize: 10,
+                        letterSpacing: "0.25em",
+                        textTransform: "uppercase",
+                        color: "rgba(255,255,255,0.4)",
+                        marginBottom: 14,
+                        fontFamily: "var(--font-sans, sans-serif)",
+                      }}
+                    >
+                      Connect
+                    </div>
+                    <div style={{ display: "flex", gap: 24 }}>
+                      {member.social.map(({ platform, url }) => (
+                        <a
+                          key={platform}
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: 7,
+                            fontSize: 13,
+                            color: "rgba(255,255,255,0.5)",
+                            textDecoration: "none",
+                            fontFamily: "var(--font-sans, sans-serif)",
+                            letterSpacing: "0.02em",
+                            transition: "color 0.2s",
+                            position: "relative",
+                          }}
+                          onMouseEnter={(e) => {
+                            (e.currentTarget as HTMLAnchorElement).style.color = "#ffffff";
+                            const underline = e.currentTarget.querySelector(".ul") as HTMLElement;
+                            if (underline) underline.style.width = "100%";
+                          }}
+                          onMouseLeave={(e) => {
+                            (e.currentTarget as HTMLAnchorElement).style.color =
+                              "rgba(255,255,255,0.5)";
+                            const underline = e.currentTarget.querySelector(".ul") as HTMLElement;
+                            if (underline) underline.style.width = "0%";
+                          }}
+                        >
+                          <SocialIcon platform={platform} />
+                          {platform}
+                          <span
+                            className="ul"
+                            style={{
+                              position: "absolute",
+                              bottom: -2,
+                              left: 0,
+                              height: 1,
+                              width: "0%",
+                              background: "#8b5cf6",
+                              transition: "width 0.25s ease",
+                            }}
+                          />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              ) : (
                 <div
                   style={{
-                    fontSize: 10,
-                    letterSpacing: "0.25em",
-                    textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.4)",
-                    marginBottom: 14,
+                    borderTop: "1px solid rgba(255,255,255,0.1)",
+                    paddingTop: 24,
+                    color: "rgba(255,255,255,0.58)",
+                    fontSize: 13,
+                    lineHeight: 1.7,
                     fontFamily: "var(--font-sans, sans-serif)",
                   }}
                 >
-                  Connect
+                  This detail page is part of the internal gallery experience. Use the contact form
+                  to discuss a build like this.
                 </div>
-                <div style={{ display: "flex", gap: 24 }}>
-                  {member.social.map(({ platform, url }) => (
-                    <a
-                      key={platform}
-                      href={url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 7,
-                        fontSize: 13,
-                        color: "rgba(255,255,255,0.5)",
-                        textDecoration: "none",
-                        fontFamily: "var(--font-sans, sans-serif)",
-                        letterSpacing: "0.02em",
-                        transition: "color 0.2s",
-                        position: "relative",
-                      }}
-                      onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLAnchorElement).style.color = "#ffffff";
-                        const underline = e.currentTarget.querySelector(".ul") as HTMLElement;
-                        if (underline) underline.style.width = "100%";
-                      }}
-                      onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLAnchorElement).style.color =
-                          "rgba(255,255,255,0.5)";
-                        const underline = e.currentTarget.querySelector(".ul") as HTMLElement;
-                        if (underline) underline.style.width = "0%";
-                      }}
-                    >
-                      <SocialIcon platform={platform} />
-                      {platform}
-                      <span
-                        className="ul"
-                        style={{
-                          position: "absolute",
-                          bottom: -2,
-                          left: 0,
-                          height: 1,
-                          width: "0%",
-                          background: "#8b5cf6",
-                          transition: "width 0.25s ease",
-                        }}
-                      />
-                    </a>
-                  ))}
-                </div>
-              </div>
+              )}
             </motion.div>
           </div>
 

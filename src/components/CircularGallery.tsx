@@ -13,6 +13,7 @@ import { useEffect, useRef } from "react";
 import "./CircularGallery.css";
 
 type GalleryItem = {
+  id?: string;
   image: string;
   text: string;
 };
@@ -26,6 +27,7 @@ type CircularGalleryProps = {
   fontUrl?: string;
   scrollSpeed?: number;
   scrollEase?: number;
+  onItemClick?: (item: GalleryItem) => void;
 };
 
 type ScrollState = {
@@ -503,6 +505,9 @@ class App {
   boundOnTouchMove!: (e: MouseEvent | TouchEvent) => void;
   boundOnTouchUp!: () => void;
   boundOnKeyDown!: (e: KeyboardEvent) => void;
+  boundOnClick!: (e: MouseEvent) => void;
+  hasDragged = false;
+  onItemClick?: (item: GalleryItem) => void;
 
   constructor(
     container: HTMLDivElement,
@@ -514,12 +519,14 @@ class App {
       font = DEFAULT_FONT,
       scrollSpeed = 2,
       scrollEase = 0.05,
+      onItemClick,
     }: CircularGalleryProps = {},
   ) {
     document.documentElement.classList.remove("no-js");
     this.container = container;
     this.scrollSpeed = scrollSpeed;
     this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
+    this.onItemClick = onItemClick;
     this.onCheckDebounce = debounce(this.onCheck.bind(this), 200);
     this.createRenderer();
     this.createCamera();
@@ -614,6 +621,7 @@ class App {
 
   onTouchDown(e: MouseEvent | TouchEvent) {
     this.isDown = true;
+    this.hasDragged = false;
     this.scroll.position = this.scroll.current;
     this.start = "touches" in e ? e.touches[0].clientX : e.clientX;
   }
@@ -622,6 +630,9 @@ class App {
     if (!this.isDown) return;
     const x = "touches" in e ? e.touches[0].clientX : e.clientX;
     const distance = (this.start - x) * (this.scrollSpeed * 0.025);
+    if (Math.abs("touches" in e ? e.touches[0].clientX - this.start : e.clientX - this.start) > 8) {
+      this.hasDragged = true;
+    }
     this.scroll.target = (this.scroll.position || 0) + distance;
   }
 
@@ -664,6 +675,43 @@ class App {
     this.scroll.target = this.scroll.target < 0 ? -item : item;
   }
 
+  onClick(e: MouseEvent) {
+    if (
+      this.hasDragged ||
+      !this.onItemClick ||
+      !this.medias?.length ||
+      !this.mediasImages?.length
+    ) {
+      return;
+    }
+
+    const rect = this.container.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const clickY = e.clientY - rect.top;
+    const candidates = this.medias
+      .map((media) => {
+        const centerX = (media.plane.position.x / this.viewport.width + 0.5) * this.screen.width;
+        const centerY = (0.5 - media.plane.position.y / this.viewport.height) * this.screen.height;
+        const width = (media.plane.scale.x / this.viewport.width) * this.screen.width;
+        const height = (media.plane.scale.y / this.viewport.height) * this.screen.height * 1.35;
+        const dx = clickX - centerX;
+        const dy = clickY - centerY;
+        return {
+          media,
+          distance: Math.hypot(dx, dy),
+          isInside: Math.abs(dx) <= width / 2 && Math.abs(dy) <= height / 2,
+        };
+      })
+      .filter((candidate) => candidate.isInside)
+      .sort((a, b) => a.distance - b.distance);
+
+    const selected = candidates[0]?.media;
+    if (!selected) return;
+
+    const originalItem = this.mediasImages[selected.index % this.mediasImages.length];
+    if (originalItem) this.onItemClick(originalItem);
+  }
+
   onResize() {
     this.screen = {
       width: this.container.clientWidth,
@@ -698,6 +746,7 @@ class App {
     this.boundOnTouchMove = this.onTouchMove.bind(this);
     this.boundOnTouchUp = this.onTouchUp.bind(this);
     this.boundOnKeyDown = this.onKeyDown.bind(this);
+    this.boundOnClick = this.onClick.bind(this);
 
     window.addEventListener("resize", this.boundOnResize);
     window.addEventListener("wheel", this.boundOnWheel, { passive: true });
@@ -708,6 +757,7 @@ class App {
     window.addEventListener("touchmove", this.boundOnTouchMove, { passive: true });
     window.addEventListener("touchend", this.boundOnTouchUp);
     this.container.addEventListener("keydown", this.boundOnKeyDown);
+    this.container.addEventListener("click", this.boundOnClick);
   }
 
   destroy() {
@@ -721,6 +771,7 @@ class App {
     window.removeEventListener("touchmove", this.boundOnTouchMove);
     window.removeEventListener("touchend", this.boundOnTouchUp);
     this.container.removeEventListener("keydown", this.boundOnKeyDown);
+    this.container.removeEventListener("click", this.boundOnClick);
 
     const canvas = this.renderer?.gl?.canvas;
     if (canvas instanceof HTMLCanvasElement && canvas.parentNode) {
@@ -738,6 +789,7 @@ export default function CircularGallery({
   fontUrl,
   scrollSpeed = 2,
   scrollEase = 0.05,
+  onItemClick,
 }: CircularGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -757,6 +809,7 @@ export default function CircularGallery({
         font: resolvedFont,
         scrollSpeed,
         scrollEase,
+        onItemClick,
       });
     });
 
@@ -764,7 +817,7 @@ export default function CircularGallery({
       isMounted = false;
       app?.destroy();
     };
-  }, [items, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase]);
+  }, [items, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase, onItemClick]);
 
   return (
     <div

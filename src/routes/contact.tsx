@@ -11,7 +11,8 @@ export const Route = createFileRoute("/contact")({
       { title: "Aryan.AI — Contact & Consultations" },
       {
         name: "description",
-        content: "Get in touch with Aryan.AI for AI building, enterprise operational automation, and custom LLM strategy consulting.",
+        content:
+          "Get in touch with Aryan.AI for AI building, enterprise operational automation, and custom LLM strategy consulting.",
       },
     ],
   }),
@@ -58,16 +59,54 @@ function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     org: "",
     type: "AI Development",
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Mock submit trigger
-    setSubmitted(true);
+    setSubmitError("");
+    setFieldErrors({});
+    setSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.org,
+          service: formData.type,
+          message: formData.message,
+        }),
+      });
+
+      const result = (await response.json()) as {
+        ok?: boolean;
+        error?: string;
+        fields?: Record<string, string>;
+      };
+      if (!response.ok || !result.ok) {
+        if (result.fields) setFieldErrors(result.fields);
+        throw new Error(result.error || "Unable to send your project brief right now");
+      }
+
+      setSubmitted(true);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error ? error.message : "Unable to send your project brief right now",
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -94,7 +133,8 @@ function ContactPage() {
             Let's Connect
           </h1>
           <p className="mt-6 max-w-2xl text-slate-300 text-lg">
-            Ready to build citation-grade AI retrieval systems, automate tedious operations, or upskill your developers? Tell us about your roadmap.
+            Ready to build citation-grade AI retrieval systems, automate tedious operations, or
+            upskill your developers? Tell us about your roadmap.
           </p>
         </div>
 
@@ -164,7 +204,12 @@ function ContactPage() {
                 >
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label htmlFor="name" className="text-xs uppercase tracking-wider text-slate-400 font-bold">Your Name</label>
+                      <label
+                        htmlFor="name"
+                        className="text-xs uppercase tracking-wider text-slate-400 font-bold"
+                      >
+                        Your Name
+                      </label>
                       <input
                         type="text"
                         id="name"
@@ -174,9 +219,17 @@ function ContactPage() {
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         className="w-full rounded-xl border border-white/10 bg-slate-950/60 p-4 text-sm text-white placeholder-slate-600 focus:border-violet-500 focus:ring-1 focus:ring-violet-500 outline-none transition"
                       />
+                      {fieldErrors.name ? (
+                        <p className="text-xs text-red-300">{fieldErrors.name}</p>
+                      ) : null}
                     </div>
                     <div className="space-y-2">
-                      <label htmlFor="email" className="text-xs uppercase tracking-wider text-slate-400 font-bold">Email Address</label>
+                      <label
+                        htmlFor="email"
+                        className="text-xs uppercase tracking-wider text-slate-400 font-bold"
+                      >
+                        Email Address
+                      </label>
                       <input
                         type="email"
                         id="email"
@@ -186,39 +239,92 @@ function ContactPage() {
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         className="w-full rounded-xl border border-white/10 bg-slate-950/60 p-4 text-sm text-white placeholder-slate-600 focus:border-violet-500 focus:ring-1 focus:ring-violet-500 outline-none transition"
                       />
+                      {fieldErrors.email ? (
+                        <p className="text-xs text-red-300">{fieldErrors.email}</p>
+                      ) : null}
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label
+                        htmlFor="phone"
+                        className="text-xs uppercase tracking-wider text-slate-400 font-bold"
+                      >
+                        Phone
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        required
+                        placeholder="+91 85879 51091"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full rounded-xl border border-white/10 bg-slate-950/60 p-4 text-sm text-white placeholder-slate-600 focus:border-violet-500 focus:ring-1 focus:ring-violet-500 outline-none transition"
+                      />
+                      {fieldErrors.phone ? (
+                        <p className="text-xs text-red-300">{fieldErrors.phone}</p>
+                      ) : null}
+                    </div>
+                    <div className="space-y-2">
+                      <label
+                        htmlFor="org"
+                        className="text-xs uppercase tracking-wider text-slate-400 font-bold"
+                      >
+                        Organization
+                      </label>
+                      <input
+                        type="text"
+                        id="org"
+                        placeholder="Company Name"
+                        value={formData.org}
+                        onChange={(e) => setFormData({ ...formData, org: e.target.value })}
+                        className="w-full rounded-xl border border-white/10 bg-slate-950/60 p-4 text-sm text-white placeholder-slate-600 focus:border-violet-500 focus:ring-1 focus:ring-violet-500 outline-none transition"
+                      />
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="org" className="text-xs uppercase tracking-wider text-slate-400 font-bold">Organization</label>
-                    <input
-                      type="text"
-                      id="org"
-                      placeholder="Company Name"
-                      value={formData.org}
-                      onChange={(e) => setFormData({ ...formData, org: e.target.value })}
-                      className="w-full rounded-xl border border-white/10 bg-slate-950/60 p-4 text-sm text-white placeholder-slate-600 focus:border-violet-500 focus:ring-1 focus:ring-violet-500 outline-none transition"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label htmlFor="type" className="text-xs uppercase tracking-wider text-slate-400 font-bold">Engagement Type</label>
+                    <label
+                      htmlFor="type"
+                      className="text-xs uppercase tracking-wider text-slate-400 font-bold"
+                    >
+                      Engagement Type
+                    </label>
                     <select
                       id="type"
                       value={formData.type}
                       onChange={(e) => setFormData({ ...formData, type: e.target.value })}
                       className="w-full rounded-xl border border-white/10 bg-slate-950/60 p-4 text-sm text-white focus:border-violet-500 focus:ring-1 focus:ring-violet-500 outline-none transition cursor-pointer"
                     >
-                      <option className="bg-slate-950" value="AI Development">AI Development & RAG</option>
-                      <option className="bg-slate-950" value="Workflow Automation">Workflow Automation (n8n/Make)</option>
-                      <option className="bg-slate-950" value="AI Consulting">AI Strategy Consulting</option>
-                      <option className="bg-slate-950" value="Corporate Training">Corporate Team Training</option>
-                      <option className="bg-slate-950" value="Other">Other / General Inquiry</option>
+                      <option className="bg-slate-950" value="AI Development">
+                        AI Development & RAG
+                      </option>
+                      <option className="bg-slate-950" value="Workflow Automation">
+                        Workflow Automation (n8n/Make)
+                      </option>
+                      <option className="bg-slate-950" value="AI Consulting">
+                        AI Strategy Consulting
+                      </option>
+                      <option className="bg-slate-950" value="Corporate Training">
+                        Corporate Team Training
+                      </option>
+                      <option className="bg-slate-950" value="Other">
+                        Other / General Inquiry
+                      </option>
                     </select>
+                    {fieldErrors.service ? (
+                      <p className="text-xs text-red-300">{fieldErrors.service}</p>
+                    ) : null}
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="message" className="text-xs uppercase tracking-wider text-slate-400 font-bold">Project Brief</label>
+                    <label
+                      htmlFor="message"
+                      className="text-xs uppercase tracking-wider text-slate-400 font-bold"
+                    >
+                      Project Brief
+                    </label>
                     <textarea
                       id="message"
                       required
@@ -228,15 +334,25 @@ function ContactPage() {
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       className="w-full rounded-xl border border-white/10 bg-slate-950/60 p-4 text-sm text-white placeholder-slate-600 focus:border-violet-500 focus:ring-1 focus:ring-violet-500 outline-none transition resize-none"
                     />
+                    {fieldErrors.message ? (
+                      <p className="text-xs text-red-300">{fieldErrors.message}</p>
+                    ) : null}
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-500 p-4 text-sm font-semibold uppercase tracking-[0.2em] text-white hover:scale-[1.01] hover:shadow-[0_8px_20px_rgba(139,92,246,0.4)] transition duration-300 cursor-pointer"
+                    disabled={submitting}
+                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-500 p-4 text-sm font-semibold uppercase tracking-[0.2em] text-white hover:scale-[1.01] hover:shadow-[0_8px_20px_rgba(139,92,246,0.4)] transition duration-300 cursor-pointer disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
                   >
-                    <span>Send Project Brief</span>
+                    <span>{submitting ? "Sending..." : "Send Project Brief"}</span>
                     <Send className="h-4 w-4" />
                   </button>
+
+                  {submitError ? (
+                    <p className="text-sm text-red-300" role="alert">
+                      {submitError}
+                    </p>
+                  ) : null}
                 </motion.form>
               ) : (
                 <motion.div
@@ -250,10 +366,23 @@ function ContactPage() {
                   </div>
                   <h3 className="font-display text-3xl text-white">Brief Submitted!</h3>
                   <p className="max-w-sm mx-auto text-slate-300 text-sm leading-relaxed">
-                    Thank you, {formData.name}. Your project brief has been received. Aryan will review your request and follow up within 24 hours.
+                    Thank you, {formData.name}. Your project brief has been received. Aryan will
+                    review your request and follow up within 24 hours.
                   </p>
                   <button
-                    onClick={() => { setSubmitted(false); setFormData({ name: "", email: "", org: "", type: "AI Development", message: "" }); }}
+                    onClick={() => {
+                      setSubmitted(false);
+                      setFieldErrors({});
+                      setSubmitError("");
+                      setFormData({
+                        name: "",
+                        email: "",
+                        phone: "",
+                        org: "",
+                        type: "AI Development",
+                        message: "",
+                      });
+                    }}
                     className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-xs uppercase tracking-wider text-white hover:bg-white/10 transition cursor-pointer"
                   >
                     Send Another Message
@@ -269,5 +398,3 @@ function ContactPage() {
     </main>
   );
 }
-
-

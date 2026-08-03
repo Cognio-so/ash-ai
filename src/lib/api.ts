@@ -1,12 +1,18 @@
+import { sendContactEmails, type ContactLead } from "./mail";
+
 type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
 
 type ContactPayload = {
   name?: unknown;
   email?: unknown;
-  company?: unknown;
+  phone?: unknown;
   service?: unknown;
   message?: unknown;
 };
+
+type ValidationResult =
+  | { ok: true; lead: ContactLead }
+  | { ok: false; status: number; error: string; fields?: Record<string, string> };
 
 const jsonHeaders = {
   "content-type": "application/json; charset=utf-8",
@@ -14,7 +20,9 @@ const jsonHeaders = {
 
 const allowedMethods = "GET,POST,OPTIONS";
 const rateLimitWindowMs = 60_000;
-const rateLimitMax = 12;
+const rateLimitMax = 8;
+const maxFieldLength = 160;
+const maxMessageLength = 2_000;
 const contactRateLimit = new Map<string, { count: number; resetAt: number }>();
 
 function json(data: JsonValue, init: ResponseInit = {}) {
@@ -27,18 +35,23 @@ function json(data: JsonValue, init: ResponseInit = {}) {
   });
 }
 
-function getCorsHeaders(request: Request) {
-  const origin = request.headers.get("origin");
-  const configuredOrigins = process.env.ALLOWED_ORIGINS?.split(",")
+function configuredOrigins() {
+  return (process.env.ALLOWED_ORIGINS || "")
+    .split(",")
     .map((value) => value.trim())
     .filter(Boolean);
+}
 
-  const allowOrigin =
-    origin && configuredOrigins?.length
-      ? configuredOrigins.includes(origin)
-        ? origin
-        : configuredOrigins[0]
-      : origin || "*";
+function isOriginAllowed(request: Request) {
+  const origin = request.headers.get("origin");
+  const origins = configuredOrigins();
+  return !origin || origins.length === 0 || origins.includes(origin);
+}
+
+function getCorsHeaders(request: Request) {
+  const origin = request.headers.get("origin");
+  const origins = configuredOrigins();
+  const allowOrigin = origin && origins.includes(origin) ? origin : origins[0] || origin || "*";
 
   return {
     "access-control-allow-origin": allowOrigin,
@@ -49,12 +62,17 @@ function getCorsHeaders(request: Request) {
   };
 }
 
-function clientKey(request: Request) {
+function clientIp(request: Request) {
   return (
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
     request.headers.get("x-real-ip") ||
-    "local"
+    request.headers.get("cf-connecting-ip") ||
+    ""
   );
+}
+
+function clientKey(request: Request) {
+  return clientIp(request) || "local";
 }
 
 function isRateLimited(request: Request) {
@@ -71,31 +89,79 @@ function isRateLimited(request: Request) {
   return existing.count > rateLimitMax;
 }
 
-function asString(value: unknown) {
-  return typeof value === "string" ? value.trim() : "";
+function rawString(value: unknown) {
+  return typeof value === "string" ? value : "";
+}
+
+function sanitizeInput(value: unknown, maxLength = maxFieldLength) {
+  return stripControlCharacters(rawString(value)).replace(/\s+/g, " ").trim().slice(0, maxLength);
+}
+
+function sanitizeMessage(value: unknown) {
+  return stripControlCharacters(rawString(value)).trim().slice(0, maxMessageLength);
+}
+
+function stripControlCharacters(value: string) {
+  return Array.from(value)
+    .filter((char) => {
+      const code = char.charCodeAt(0);
+      return code === 9 || code === 10 || code === 13 || (code >= 32 && code !== 127);
+    })
+    .join("");
 }
 
 function isEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-async function forwardLead(payload: Record<string, string>) {
-  const webhookUrl = process.env.CONTACT_WEBHOOK_URL;
-  if (!webhookUrl) return;
+function isPhone(value: string) {
+  return /^[+\d][\d\s().-]{6,24}$/.test(value);
+}
 
-  const response = await fetch(webhookUrl, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({
-      source: "aryan.ai",
-      submittedAt: new Date().toISOString(),
-      ...payload,
-    }),
-  });
+function validateContactPayload(body: ContactPayload, request: Request): ValidationResult {
+  const fields: Record<string, string> = {};
+  const name = sanitizeInput(body.name);
+  const email = sanitizeInput(body.email).toLowerCase();
+  const phone = sanitizeInput(body.phone, 32);
+  const service = sanitizeInput(body.service);
+  const message = sanitizeMessage(body.message);
 
-  if (!response.ok) {
-    throw new Error(`Lead webhook failed with ${response.status}`);
+  if (!name) fields.name = "Name is required.";
+  if (!email) fields.email = "Email is required.";
+  if (!phone) fields.phone = "Phone is required.";
+  if (!service) fields.service = "Service is required.";
+  if (!message) fields.message = "Message is required.";
+
+  if (name && name.length < 2) fields.name = "Name must be at least 2 characters.";
+  if (email && !isEmail(email)) fields.email = "Enter a valid email address.";
+  if (phone && !isPhone(phone)) fields.phone = "Enter a valid phone number.";
+  if (service && service.length < 2) fields.service = "Select a valid service.";
+
+  if (rawString(body.message).trim().length > maxMessageLength) {
+    fields.message = `Message must be ${maxMessageLength} characters or fewer.`;
   }
+
+  if (Object.keys(fields).length > 0) {
+    return {
+      ok: false,
+      status: 422,
+      error: "Please correct the highlighted fields.",
+      fields,
+    };
+  }
+
+  return {
+    ok: true,
+    lead: {
+      name,
+      email,
+      phone,
+      service,
+      message,
+      submittedAt: new Date().toISOString(),
+      clientIp: clientIp(request),
+    },
+  };
 }
 
 async function handleContact(request: Request) {
@@ -103,8 +169,19 @@ async function handleContact(request: Request) {
     return json({ ok: false, error: "Method not allowed" }, { status: 405 });
   }
 
+  if (!isOriginAllowed(request)) {
+    console.warn("[contact-api] Blocked disallowed origin", {
+      origin: request.headers.get("origin"),
+    });
+    return json({ ok: false, error: "Origin is not allowed" }, { status: 403 });
+  }
+
   if (isRateLimited(request)) {
-    return json({ ok: false, error: "Too many requests" }, { status: 429 });
+    console.warn("[contact-api] Rate limit exceeded", { clientIp: clientIp(request) || "local" });
+    return json(
+      { ok: false, error: "Too many requests. Please try again later." },
+      { status: 429 },
+    );
   }
 
   let body: ContactPayload;
@@ -114,30 +191,43 @@ async function handleContact(request: Request) {
     return json({ ok: false, error: "Invalid JSON body" }, { status: 400 });
   }
 
-  const name = asString(body.name);
-  const email = asString(body.email);
-  const company = asString(body.company);
-  const service = asString(body.service);
-  const message = asString(body.message);
-
-  if (!name || !email || !message) {
-    return json({ ok: false, error: "Name, email, and message are required" }, { status: 400 });
+  const validation = validateContactPayload(body, request);
+  if (!validation.ok) {
+    console.info("[contact-api] Validation failed", {
+      fields: Object.keys(validation.fields || {}),
+    });
+    return json(
+      {
+        ok: false,
+        error: validation.error,
+        fields: validation.fields || {},
+      },
+      { status: validation.status },
+    );
   }
 
-  if (!isEmail(email)) {
-    return json({ ok: false, error: "Enter a valid email address" }, { status: 400 });
-  }
-
-  if (message.length > 2_000) {
-    return json({ ok: false, error: "Message is too long" }, { status: 400 });
-  }
-
-  await forwardLead({ name, email, company, service, message });
-
-  return json({
-    ok: true,
-    message: "Thanks. Your request has been received.",
+  console.info("[contact-api] Contact submission accepted", {
+    email: validation.lead.email,
+    service: validation.lead.service,
+    clientIp: validation.lead.clientIp || "unavailable",
   });
+
+  const delivery = await sendContactEmails(validation.lead);
+  if (!delivery.ok) {
+    const responseBody: JsonValue = delivery.detail
+      ? { ok: false, error: delivery.error, detail: delivery.detail }
+      : { ok: false, error: delivery.error };
+
+    return json(responseBody, { status: 500 });
+  }
+
+  return json(
+    {
+      ok: true,
+      message: "Thanks. Your request has been received.",
+    },
+    { status: 200 },
+  );
 }
 
 export async function handleApiRequest(request: Request) {
@@ -145,6 +235,9 @@ export async function handleApiRequest(request: Request) {
   const corsHeaders = getCorsHeaders(request);
 
   if (request.method === "OPTIONS") {
+    if (!isOriginAllowed(request)) {
+      return new Response(null, { status: 403, headers: corsHeaders });
+    }
     return new Response(null, { status: 204, headers: corsHeaders });
   }
 
@@ -184,7 +277,10 @@ export async function handleApiRequest(request: Request) {
       headers,
     });
   } catch (error) {
-    console.error(error);
-    return json({ ok: false, error: "Internal server error" }, { status: 500 });
+    console.error("[api] Unhandled API error", error);
+    return json(
+      { ok: false, error: "Internal server error" },
+      { status: 500, headers: corsHeaders },
+    );
   }
 }

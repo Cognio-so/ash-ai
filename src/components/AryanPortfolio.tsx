@@ -24,8 +24,9 @@ import {
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import CircularGallery from "./CircularGallery";
-import TeamMemberPage, { teamMembers } from "./TeamMemberPage";
+import TeamMemberPage from "./TeamMemberPage";
 import TextType from "./TextType";
+import TrueFocus from "./TrueFocus";
 import aryanPortrait from "@/assets/aryan-portrait.png";
 import aryanAboutPortrait from "@/assets/aryan-about-portrait.png";
 import inspirationIllustration from "@/assets/inspiration-philosophy-illustration.png";
@@ -409,28 +410,40 @@ const portfolioItems: Project[] = [
 
 const galleryItems = [
   {
-    image: aryanPortrait,
-    text: "Aryan",
+    id: "automation-lab",
+    image:
+      "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=1600&q=92",
+    text: "Automation Lab",
   },
   {
-    image: aryanAboutPortrait,
-    text: "Builder",
+    id: "agent-systems",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1600&q=92",
+    text: "Agent Systems",
   },
   {
-    image: inspirationIllustration,
-    text: "Philosophy",
+    id: "ai-products",
+    image:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=92",
+    text: "AI Products",
   },
   {
-    image: "/document-intelligence-pipeline.png",
-    text: "Documents",
+    id: "founder-strategy",
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1600&q=92",
+    text: "Founder Strategy",
   },
   {
-    image: "/autonomous-operations-platform.png",
-    text: "Operations",
+    id: "ai-operator",
+    image:
+      "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=1600&q=92",
+    text: "AI Operator",
   },
   {
-    image: "/ashu-logo.png",
-    text: "Ashu AI",
+    id: "product-lead",
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1600&q=92",
+    text: "Product Lead",
   },
 ];
 
@@ -897,22 +910,10 @@ export default function AryanPortfolio() {
                 scrollSpeed={2.2}
                 fontUrl="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap"
                 font="bold 30px Orbitron"
+                onItemClick={(item) => {
+                  if (item.id) setActiveTeamMember(item.id);
+                }}
               />
-              {/* Invisible click overlay — maps gallery slots to team members */}
-              <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
-                <div className="flex gap-[clamp(60px,9vw,130px)] pointer-events-none">
-                  {teamMembers.map((member) => (
-                    <button
-                      key={member.id}
-                      onClick={() => setActiveTeamMember(member.id)}
-                      aria-label={`View ${member.name}'s profile`}
-                      title={member.name}
-                      className="pointer-events-auto w-[clamp(60px,8vw,110px)] h-[clamp(80px,12vw,160px)] rounded-xl bg-transparent border-0 cursor-pointer opacity-0 hover:opacity-100 hover:bg-white/5 transition-all duration-300"
-                      style={{ transform: "translateY(-10px)" }}
-                    />
-                  ))}
-                </div>
-              </div>
             </div>
           </Reveal>
 
