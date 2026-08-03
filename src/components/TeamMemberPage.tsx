@@ -142,8 +142,8 @@ function InitialsAvatar({ name }: { name: string }) {
         paddingBottom: "125%",
         position: "relative",
         borderRadius: 16,
-        background: "#1a1a1a",
-        border: "0.5px solid rgba(255,255,255,0.15)",
+        background: "#fffaf3",
+        border: "0.5px solid rgba(46,42,39,0.12)",
       }}
     >
       <div
@@ -155,7 +155,7 @@ function InitialsAvatar({ name }: { name: string }) {
           justifyContent: "center",
           fontSize: "5rem",
           fontWeight: 300,
-          color: "rgba(255,255,255,0.3)",
+          color: "rgba(46,42,39,0.3)",
           fontFamily: "serif",
           letterSpacing: "-0.02em",
         }}
@@ -275,11 +275,9 @@ export default function TeamMemberPage({
               (e.currentTarget as HTMLButtonElement).style.borderColor = "#2e2a27";
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.background =
-                "rgba(255,250,243,0.82)";
+              (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,250,243,0.82)";
               (e.currentTarget as HTMLButtonElement).style.color = "#2e2a27";
-              (e.currentTarget as HTMLButtonElement).style.borderColor =
-                "rgba(46,42,39,0.12)";
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(46,42,39,0.12)";
             }}
           >
             <ArrowLeft size={13} />
@@ -430,7 +428,7 @@ export default function TeamMemberPage({
                   fontFamily: "'Playfair Display', Georgia, serif",
                   fontStyle: "italic",
                   fontSize: "1.1rem",
-                  color: "#c4a5ff",
+                  color: "#7c4d2b",
                   lineHeight: 1.65,
                   marginBottom: 28,
                 }}
@@ -444,7 +442,7 @@ export default function TeamMemberPage({
                   width: "100%",
                   height: 1,
                   background:
-                    "linear-gradient(90deg, rgba(255,190,118,0.24), rgba(139,92,246,0.28), transparent)",
+                    "linear-gradient(90deg, rgba(166,124,82,0.32), rgba(222,208,189,0.72), transparent)",
                   marginBottom: 28,
                 }}
               />
@@ -454,7 +452,7 @@ export default function TeamMemberPage({
                 style={{
                   fontSize: "0.925rem",
                   lineHeight: 1.9,
-                  color: "rgba(255,255,255,0.86)",
+                  color: "#3f352b",
                   marginBottom: 32,
                   fontFamily: "var(--font-sans, sans-serif)",
                   WebkitFontSmoothing: "antialiased",
@@ -470,7 +468,7 @@ export default function TeamMemberPage({
                     fontSize: 10,
                     letterSpacing: "0.25em",
                     textTransform: "uppercase",
-                    color: "rgba(255,230,204,0.52)",
+                    color: "rgba(93,75,55,0.6)",
                     marginBottom: 12,
                     fontFamily: "var(--font-sans, sans-serif)",
                   }}
@@ -484,25 +482,24 @@ export default function TeamMemberPage({
                       style={{
                         padding: "5px 16px",
                         borderRadius: 20,
-                        border: "1px solid rgba(255,255,255,0.13)",
+                        border: "1px solid rgba(46,42,39,0.12)",
                         fontSize: 12,
-                        color: "rgba(255,244,230,0.78)",
+                        color: "#4f4032",
                         fontFamily: "var(--font-sans, sans-serif)",
                         letterSpacing: "0.04em",
                         transition: "border-color 0.2s, color 0.2s, background 0.2s",
-                        background: "rgba(255,255,255,0.07)",
+                        background: "rgba(255,255,255,0.72)",
                       }}
                       onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLElement).style.borderColor = "#8b5cf6";
-                        (e.currentTarget as HTMLElement).style.color = "#ffffff";
-                        (e.currentTarget as HTMLElement).style.background = "rgba(139,92,246,0.15)";
+                        (e.currentTarget as HTMLElement).style.borderColor = "#a67c52";
+                        (e.currentTarget as HTMLElement).style.color = "#2e2a27";
+                        (e.currentTarget as HTMLElement).style.background = "rgba(166,124,82,0.12)";
                       }}
                       onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLElement).style.borderColor =
-                          "rgba(255,255,255,0.1)";
-                        (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.7)";
+                        (e.currentTarget as HTMLElement).style.borderColor = "rgba(46,42,39,0.12)";
+                        (e.currentTarget as HTMLElement).style.color = "#4f4032";
                         (e.currentTarget as HTMLElement).style.background =
-                          "rgba(255,255,255,0.05)";
+                          "rgba(255,255,255,0.72)";
                       }}
                     >
                       {skill}
@@ -517,7 +514,7 @@ export default function TeamMemberPage({
                     style={{
                       width: "100%",
                       height: 1,
-                      background: "rgba(255,255,255,0.1)",
+                      background: "rgba(46,42,39,0.12)",
                       marginBottom: 24,
                     }}
                   />
@@ -528,7 +525,7 @@ export default function TeamMemberPage({
                         fontSize: 10,
                         letterSpacing: "0.25em",
                         textTransform: "uppercase",
-                        color: "rgba(255,255,255,0.4)",
+                        color: "rgba(93,75,55,0.58)",
                         marginBottom: 14,
                         fontFamily: "var(--font-sans, sans-serif)",
                       }}
@@ -547,7 +544,7 @@ export default function TeamMemberPage({
                             alignItems: "center",
                             gap: 7,
                             fontSize: 13,
-                            color: "rgba(255,255,255,0.5)",
+                            color: "rgba(93,75,55,0.68)",
                             textDecoration: "none",
                             fontFamily: "var(--font-sans, sans-serif)",
                             letterSpacing: "0.02em",
@@ -555,13 +552,13 @@ export default function TeamMemberPage({
                             position: "relative",
                           }}
                           onMouseEnter={(e) => {
-                            (e.currentTarget as HTMLAnchorElement).style.color = "#ffffff";
+                            (e.currentTarget as HTMLAnchorElement).style.color = "#2e2a27";
                             const underline = e.currentTarget.querySelector(".ul") as HTMLElement;
                             if (underline) underline.style.width = "100%";
                           }}
                           onMouseLeave={(e) => {
                             (e.currentTarget as HTMLAnchorElement).style.color =
-                              "rgba(255,255,255,0.5)";
+                              "rgba(93,75,55,0.68)";
                             const underline = e.currentTarget.querySelector(".ul") as HTMLElement;
                             if (underline) underline.style.width = "0%";
                           }}
@@ -576,7 +573,7 @@ export default function TeamMemberPage({
                               left: 0,
                               height: 1,
                               width: "0%",
-                              background: "#8b5cf6",
+                              background: "#a67c52",
                               transition: "width 0.25s ease",
                             }}
                           />
@@ -588,9 +585,9 @@ export default function TeamMemberPage({
               ) : (
                 <div
                   style={{
-                    borderTop: "1px solid rgba(255,255,255,0.12)",
+                    borderTop: "1px solid rgba(46,42,39,0.12)",
                     paddingTop: 24,
-                    color: "rgba(255,230,204,0.68)",
+                    color: "#5f503e",
                     fontSize: 13,
                     lineHeight: 1.7,
                     fontFamily: "var(--font-sans, sans-serif)",
