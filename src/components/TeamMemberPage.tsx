@@ -209,14 +209,37 @@ export default function TeamMemberPage({
             position: "fixed",
             inset: 0,
             zIndex: 200,
-            background: "#030611",
+            background: "#120b1f",
             backgroundImage:
-              "radial-gradient(circle at 100% 0%, rgba(99, 102, 241, 0.12) 0%, transparent 40%), radial-gradient(circle at 0% 100%, rgba(139, 92, 246, 0.1) 0%, transparent 40%)",
+              "radial-gradient(circle at 15% 10%, rgba(255, 190, 118, 0.16) 0%, transparent 28%), radial-gradient(circle at 82% 18%, rgba(139, 92, 246, 0.28) 0%, transparent 34%), radial-gradient(circle at 62% 88%, rgba(34, 211, 238, 0.13) 0%, transparent 32%), linear-gradient(135deg, #070815 0%, #120b1f 45%, #24140f 100%)",
             overflowY: "auto",
             WebkitFontSmoothing: "antialiased",
             MozOsxFontSmoothing: "grayscale",
           }}
         >
+          <div
+            aria-hidden
+            style={{
+              position: "fixed",
+              inset: 0,
+              pointerEvents: "none",
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)",
+              backgroundSize: "46px 46px",
+              maskImage: "radial-gradient(circle at center, black 0%, transparent 76%)",
+              opacity: 0.36,
+            }}
+          />
+          <div
+            aria-hidden
+            style={{
+              position: "fixed",
+              inset: 0,
+              pointerEvents: "none",
+              background:
+                "linear-gradient(90deg, rgba(0,0,0,0.45), transparent 28%, transparent 72%, rgba(0,0,0,0.42))",
+            }}
+          />
           {/* ── Back button ── */}
           <motion.button
             initial={{ opacity: 0, x: -12 }}
@@ -234,8 +257,8 @@ export default function TeamMemberPage({
               gap: 8,
               padding: "8px 18px",
               borderRadius: 40,
-              border: "1px solid rgba(255,255,255,0.1)",
-              background: "rgba(15,23,42,0.8)",
+              border: "1px solid rgba(255,255,255,0.16)",
+              background: "rgba(18,13,31,0.72)",
               backdropFilter: "blur(12px)",
               color: "#ffffff",
               fontSize: 10,
@@ -244,7 +267,7 @@ export default function TeamMemberPage({
               textTransform: "uppercase",
               cursor: "pointer",
               transition: "border-color 0.2s, background 0.2s",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+              boxShadow: "0 12px 34px rgba(0,0,0,0.32)",
             }}
             onMouseEnter={(e) => {
               (e.currentTarget as HTMLButtonElement).style.background = "#8b5cf6";
@@ -252,9 +275,9 @@ export default function TeamMemberPage({
               (e.currentTarget as HTMLButtonElement).style.borderColor = "#8b5cf6";
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.background = "rgba(15,23,42,0.8)";
+              (e.currentTarget as HTMLButtonElement).style.background = "rgba(18,13,31,0.72)";
               (e.currentTarget as HTMLButtonElement).style.color = "#ffffff";
-              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.1)";
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.16)";
             }}
           >
             <ArrowLeft size={13} />
@@ -284,6 +307,18 @@ export default function TeamMemberPage({
               transition={{ delay: 0.1, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             >
               <div style={{ position: "relative" }}>
+                <div
+                  aria-hidden
+                  style={{
+                    position: "absolute",
+                    inset: "-24px",
+                    borderRadius: 30,
+                    background:
+                      "linear-gradient(135deg, rgba(255,190,118,0.26), rgba(139,92,246,0.3), rgba(34,211,238,0.12))",
+                    filter: "blur(26px)",
+                    opacity: 0.72,
+                  }}
+                />
                 {member.image ? (
                   <img
                     src={member.image}
@@ -291,15 +326,17 @@ export default function TeamMemberPage({
                     loading="eager"
                     decoding="async"
                     style={{
+                      position: "relative",
                       width: "100%",
                       aspectRatio: "4/5",
                       objectFit: "cover",
                       objectPosition: "center top",
-                      borderRadius: 16,
-                      filter: "saturate(1.05)",
-                      border: "1px solid rgba(255,255,255,0.1)",
+                      borderRadius: 24,
+                      filter: "saturate(1.1) contrast(1.04)",
+                      border: "1px solid rgba(255,255,255,0.18)",
                       display: "block",
-                      boxShadow: "0 20px 60px -20px rgba(0,0,0,0.5)",
+                      boxShadow:
+                        "0 34px 90px -28px rgba(0,0,0,0.78), 0 0 0 8px rgba(255,255,255,0.035)",
                     }}
                   />
                 ) : (
@@ -313,7 +350,7 @@ export default function TeamMemberPage({
                     fontSize: 10,
                     letterSpacing: "0.2em",
                     textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.5)",
+                    color: "rgba(255,230,204,0.66)",
                     fontFamily: "var(--font-sans, sans-serif)",
                   }}
                 >
@@ -351,7 +388,7 @@ export default function TeamMemberPage({
                     background: "rgba(255,255,255,0.2)",
                   }}
                 />
-                {member.label}
+                <span style={{ color: "rgba(255,190,118,0.72)" }}>{member.label}</span>
               </div>
 
               {/* Name */}
@@ -360,7 +397,7 @@ export default function TeamMemberPage({
                   fontFamily: "'Playfair Display', Georgia, serif",
                   fontSize: "clamp(2rem, 4vw, 2.8rem)",
                   fontWeight: 400,
-                  color: "#ffffff",
+                  color: "#fff4e6",
                   lineHeight: 1.1,
                   letterSpacing: "-0.02em",
                   margin: "0 0 10px",
@@ -375,7 +412,7 @@ export default function TeamMemberPage({
               <div
                 style={{
                   fontSize: "1rem",
-                  color: "rgba(255,255,255,0.5)",
+                  color: "rgba(255,230,204,0.64)",
                   fontWeight: 400,
                   marginBottom: 18,
                   fontFamily: "var(--font-sans, sans-serif)",
@@ -391,7 +428,7 @@ export default function TeamMemberPage({
                   fontFamily: "'Playfair Display', Georgia, serif",
                   fontStyle: "italic",
                   fontSize: "1.1rem",
-                  color: "#a78bfa",
+                  color: "#c4a5ff",
                   lineHeight: 1.65,
                   marginBottom: 28,
                 }}
@@ -404,7 +441,8 @@ export default function TeamMemberPage({
                 style={{
                   width: "100%",
                   height: 1,
-                  background: "rgba(255,255,255,0.1)",
+                  background:
+                    "linear-gradient(90deg, rgba(255,190,118,0.24), rgba(139,92,246,0.28), transparent)",
                   marginBottom: 28,
                 }}
               />
@@ -414,7 +452,7 @@ export default function TeamMemberPage({
                 style={{
                   fontSize: "0.925rem",
                   lineHeight: 1.9,
-                  color: "rgba(255,255,255,0.8)",
+                  color: "rgba(255,255,255,0.86)",
                   marginBottom: 32,
                   fontFamily: "var(--font-sans, sans-serif)",
                   WebkitFontSmoothing: "antialiased",
@@ -430,7 +468,7 @@ export default function TeamMemberPage({
                     fontSize: 10,
                     letterSpacing: "0.25em",
                     textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.4)",
+                    color: "rgba(255,230,204,0.52)",
                     marginBottom: 12,
                     fontFamily: "var(--font-sans, sans-serif)",
                   }}
@@ -444,13 +482,13 @@ export default function TeamMemberPage({
                       style={{
                         padding: "5px 16px",
                         borderRadius: 20,
-                        border: "1px solid rgba(255,255,255,0.1)",
+                        border: "1px solid rgba(255,255,255,0.13)",
                         fontSize: 12,
-                        color: "rgba(255,255,255,0.7)",
+                        color: "rgba(255,244,230,0.78)",
                         fontFamily: "var(--font-sans, sans-serif)",
                         letterSpacing: "0.04em",
                         transition: "border-color 0.2s, color 0.2s, background 0.2s",
-                        background: "rgba(255,255,255,0.05)",
+                        background: "rgba(255,255,255,0.07)",
                       }}
                       onMouseEnter={(e) => {
                         (e.currentTarget as HTMLElement).style.borderColor = "#8b5cf6";
@@ -548,9 +586,9 @@ export default function TeamMemberPage({
               ) : (
                 <div
                   style={{
-                    borderTop: "1px solid rgba(255,255,255,0.1)",
+                    borderTop: "1px solid rgba(255,255,255,0.12)",
                     paddingTop: 24,
-                    color: "rgba(255,255,255,0.58)",
+                    color: "rgba(255,230,204,0.68)",
                     fontSize: 13,
                     lineHeight: 1.7,
                     fontFamily: "var(--font-sans, sans-serif)",
