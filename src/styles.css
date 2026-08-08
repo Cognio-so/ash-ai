@@ -169,12 +169,11 @@
 }
 
 /* Warm editorial theme inspired by the reference site */
-@layer base {
-  html,
-  body {
-    background: #f8f4ec;
-    color: #2b2117;
-  }
+/* Editorial warm theme — scoped to .paper-page only (do NOT apply globally,
+   otherwise the dark admin panel and other dark pages break). */
+.paper-page {
+  background: #f8f4ec;
+  color: #2b2117;
 }
 
 .paper-page,
@@ -558,8 +557,8 @@
 }
 
 @media (max-width: 767px) {
-  html,
-  body {
+  /* Scoped to .paper-page — keep dark pages dark on mobile */
+  .paper-page {
     background: #fbf7ef;
     background-image: none;
   }
