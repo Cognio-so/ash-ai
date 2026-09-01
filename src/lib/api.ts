@@ -1,6 +1,6 @@
 import { sendContactEmails, type ContactLead } from "./mail";
 import { insertLead, fetchAllLeads } from "./supabase-admin";
-import { sendResendConfirmation } from "./resend-mail";
+import { sendResendAdminNotification, sendResendConfirmation } from "./resend-mail";
 
 type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
 
@@ -260,16 +260,22 @@ async function handleContact(request: Request) {
     submittedAt: validation.lead.submittedAt,
   }).catch((err) => console.error("[contact-api] Supabase save failed", err));
 
-  // 2. Send beautiful Resend confirmation to the client (non-blocking)
+  // 2. Send Admin Notification to aryanthealgohype@gmail.com via Resend
+  const adminResendResult = await sendResendAdminNotification(validation.lead);
+  if (!adminResendResult.ok) {
+    console.warn("[contact-api] Resend admin notification delivery warning:", adminResendResult.error);
+  }
+
+  // 3. Send confirmation email to client via Resend (non-blocking)
   sendResendConfirmation(validation.lead).catch((err) =>
-    console.error("[contact-api] Resend confirmation failed", err),
+    console.warn("[contact-api] Resend client confirmation failed", err),
   );
 
-  // 3. Send admin notification via SMTP (existing flow)
-  const delivery = await sendContactEmails(validation.lead);
-  if (!delivery.ok) {
-    // SMTP failed, but we still saved to Supabase — return success to user
-    console.warn("[contact-api] SMTP delivery failed (Supabase save succeeded)", delivery.error);
+  // 4. Send admin notification via SMTP if SMTP credentials are provided
+  if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+    sendContactEmails(validation.lead).catch((err) =>
+      console.warn("[contact-api] SMTP delivery failed", err),
+    );
   }
 
   return json(

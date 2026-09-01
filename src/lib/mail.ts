@@ -45,8 +45,8 @@ function getMailConfig(): { config?: MailConfig; missing: string[]; invalid: str
   const rawSecure = requiredEnv("SMTP_SECURE");
   const user = requiredEnv("SMTP_USER");
   const pass = requiredEnv("SMTP_PASS");
-  const toEmail = requiredEnv("CONTACT_TO_EMAIL");
-  const fromEmail = requiredEnv("CONTACT_FROM_EMAIL");
+  const toEmail = requiredEnv("CONTACT_TO_EMAIL") || "aryanthealgohype@gmail.com";
+  const fromEmail = requiredEnv("CONTACT_FROM_EMAIL") || requiredEnv("SMTP_USER") || "aryanthealgohype@gmail.com";
 
   for (const [key, value] of Object.entries({
     SMTP_HOST: host,

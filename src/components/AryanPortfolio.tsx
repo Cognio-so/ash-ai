@@ -410,40 +410,40 @@ const portfolioItems: Project[] = [
 
 const galleryItems = [
   {
-    id: "automation-lab",
+    id: "alex",
     image:
       "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=1600&q=92",
-    text: "Automation Lab",
+    text: "Alex",
   },
   {
-    id: "agent-systems",
+    id: "omar",
     image:
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1600&q=92",
-    text: "Agent Systems",
+    text: "Omar",
   },
   {
-    id: "ai-products",
+    id: "elena",
     image:
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=92",
-    text: "AI Products",
+    text: "Elena",
   },
   {
-    id: "founder-strategy",
+    id: "sophia",
     image:
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1600&q=92",
-    text: "Founder Strategy",
+    text: "Sophia",
   },
   {
-    id: "ai-operator",
+    id: "marco",
     image:
       "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=1600&q=92",
-    text: "AI Operator",
+    text: "Marco",
   },
   {
-    id: "product-lead",
+    id: "priya",
     image:
       "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1600&q=92",
-    text: "Product Lead",
+    text: "Priya",
   },
 ];
 
